@@ -1,0 +1,13 @@
+# Logical Partitions (Super)
+system      /system     ext4    ro      wait,slotselect,logical
+vendor      /vendor     ext4    ro      wait,slotselect,logical
+product     /product    ext4    ro      wait,slotselect,logical
+system_ext  /system_ext ext4    ro      wait,slotselect,logical
+
+# Physical Partitions
+/dev/block/by-name/metadata    /metadata   ext4    noatime,nosuid,nodev,discard wait,check,formattable
+/dev/block/by-name/userdata    /data       f2fs    noatime,nosuid,nodev,discard wait,check,formattable,fileencryption=aes-256-xts
+/dev/block/by-name/boot        /boot       emmc    defaults     slotselect
+/dev/block/by-name/misc        /misc       emmc    defaults     defaults
+/dev/block/by-name/nvram       /nvram      emmc    defaults     defaults
+/dev/block/by-name/vbmeta      /vbmeta     emmc    defaults     defaults
