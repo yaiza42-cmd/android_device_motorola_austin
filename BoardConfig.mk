@@ -27,3 +27,11 @@ BOARD_MOTOROLA_DYNAMIC_PARTITIONS_PARTITION_LIST := system system_ext product ve
 # Arquitectura y Apps (Evita el error de 32-bit)
 TARGET_SUPPORTS_64_BIT_APPS := true
 TARGET_SUPPORTS_ARM_64_BIT_APPS := true
+
+# TWRP Graphics
+TARGET_SCREEN_WIDTH := 720
+TARGET_SCREEN_HEIGHT := 1600
+TW_THEME := portrait_hdpi
+TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
+TW_MAX_BRIGHTNESS := 255
+TW_DEFAULT_BRIGHTNESS := 162
