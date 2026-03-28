@@ -35,10 +35,10 @@ BOARD_HAS_NO_REAL_SDCARD := true
 BOARD_ROOT_EXTRA_FOLDERS := bluetooth metadata postinstall
 BOARD_HAS_NO_VENDOR_PARTITION := true
 
-# Forzar empaquetado directo para dispositivos A/B
+# Solución para error rsync en dispositivos A/B con Android 12
 BOARD_USES_RECOVERY_AS_BOOT := true
 TARGET_NO_RECOVERY := false
-BOARD_USES_FULL_RECOVERY_IMAGE := true
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 
 BOARD_SUPER_PARTITION_SIZE := 9126805504
 BOARD_SUPER_PARTITION_GROUPS := motorola_dynamic_partitions
