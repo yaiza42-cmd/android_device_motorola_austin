@@ -28,17 +28,25 @@ AB_OTA_UPDATER := true
 # --- ESTO ES LO QUE SOLUCIONA EL ERROR FAILED: AB_OTA_PARTITIONS ---
 AB_OTA_PARTITIONS := boot system system_ext product vendor vbmeta
 BOARD_USES_RECOVERY_AS_BOOT := true
-# ------------------------------------------------------------------
 
-# Root / Ramdisk Fix
-BOARD_HAS_NO_REAL_SDCARD := true
+# --- SOLUCIÓN DEFINITIVA PARA ERROR RSYNC (INTENTO #19) ---
+
+# Inyectar archivos directamente en la ramdisk de recuperación
+PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)/init.recovery.mt6833.rc:recovery/root/init.recovery.mt6833.rc \
+    $(DEVICE_PATH)/prop.default:recovery/root/prop.default \
+    $(DEVICE_PATH)/ueventd.rc:recovery/root/ueventd.rc \
+    $(DEVICE_PATH)/vendor_file_contexts:recovery/root/vendor_file_contexts
+
+# Forzar la creación de la ruta que rsync está buscando
+TARGET_RECOVERY_ROOT_OUT := out/target/product/austin/recovery/root
 BOARD_ROOT_EXTRA_FOLDERS := bluetooth metadata postinstall
 BOARD_HAS_NO_VENDOR_PARTITION := true
 
-# Solución para error rsync en dispositivos A/B con Android 12
+# Configuración A/B y sistema unificado
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 BOARD_USES_RECOVERY_AS_BOOT := true
 TARGET_NO_RECOVERY := false
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 
 BOARD_SUPER_PARTITION_SIZE := 9126805504
 BOARD_SUPER_PARTITION_GROUPS := motorola_dynamic_partitions
