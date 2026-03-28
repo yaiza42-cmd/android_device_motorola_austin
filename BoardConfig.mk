@@ -17,9 +17,11 @@ BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2 buildvariant=user
 BOARD_MKBOOTIMG_ARGS := --base $(BOARD_KERNEL_BASE) --pagesize $(BOARD_KERNEL_PAGESIZE) --cmdline "$(BOARD_KERNEL_CMDLINE)"
 
-# Kernel - Definición del binario (Añade esto)
+# Kernel
 BOARD_KERNEL_IMAGE_NAME := Image.gz
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
+BOARD_PREBUILT_DTBIMAGE_PATH := $(DEVICE_PATH)/prebuilt/boot.img-dtb
+BOARD_INCLUDE_RECOVERY_DTBO := true
 
 # Particiones Dinámicas y A/B
 AB_OTA_UPDATER := true
