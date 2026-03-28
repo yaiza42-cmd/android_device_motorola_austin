@@ -15,3 +15,4 @@ PRODUCT_GMS_CLIENTID_BASE := android-motorola
 
 # Forzar arquitectura 64 bits
 TARGET_IS_64_BIT := true
+TARGET_SUPPORTS_64_BIT_APPS := true
