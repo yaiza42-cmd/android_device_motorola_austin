@@ -29,7 +29,7 @@ AB_OTA_UPDATER := true
 AB_OTA_PARTITIONS := boot system system_ext product vendor vbmeta
 BOARD_USES_RECOVERY_AS_BOOT := true
 
-# --- AJUSTE FINAL (INTENTO #20) ---
+# --- AJUSTE FINAL (INTENTO #21) ---
 
 # Inyectamos solo los archivos que el sistema NO genera solo
 # Eliminamos vendor_file_contexts de aquí para evitar el error de duplicidad
@@ -51,6 +51,11 @@ BOARD_HAS_NO_VENDOR_PARTITION := true
 # Forzamos que el sistema sepa que no hay una carpeta root real
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 BOARD_USES_RECOVERY_AS_BOOT := true
+
+# --- EL "KILLER" DEL ERROR RSYNC ---
+# Este comando crea la carpeta físicamente durante la fase de lectura del config.
+$(shell mkdir -p $(OUT_DIR)/target/product/austin/root)
+$(shell mkdir -p out/target/product/austin/root)
 
 # Creamos una variable para simplificar la creación del directorio
 TARGET_RECOVERY_ROOT_OUT := out/target/product/austin/recovery/root
