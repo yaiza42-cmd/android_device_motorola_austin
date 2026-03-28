@@ -1,12 +1,13 @@
-# Heredar de la base de AOSP para TWRP
-$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
+# Heredar de la configuración genérica de TWRP
+$(call inherit-product, vendor/twrp/config/common.mk)
 
-# Identificadores del dispositivo
+# Heredar del árbol del dispositivo (¡Esta ruta es la clave!)
+$(call inherit-product, device/motorola/austin/device.mk)
+
 PRODUCT_DEVICE := austin
 PRODUCT_NAME := twrp_austin
 PRODUCT_BRAND := motorola
-PRODUCT_MODEL := Moto G 5G 2022
+PRODUCT_MODEL := Moto G 5G (2022)
 PRODUCT_MANUFACTURER := motorola
 
 # Configuración de la compilación
