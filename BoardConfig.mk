@@ -19,13 +19,11 @@ BOARD_MKBOOTIMG_ARGS := --base $(BOARD_KERNEL_BASE) --pagesize $(BOARD_KERNEL_PA
 
 # Particiones Dinámicas y A/B
 AB_OTA_UPDATER := true
-
-# Basado en tu volcado de 7.8GB con margen para el contenedor super
 BOARD_SUPER_PARTITION_SIZE := 9126805504
 BOARD_SUPER_PARTITION_GROUPS := motorola_dynamic_partitions
 BOARD_MOTOROLA_DYNAMIC_PARTITIONS_SIZE := 8589934592
 BOARD_MOTOROLA_DYNAMIC_PARTITIONS_PARTITION_LIST := system system_ext product vendor
 
-# Arquitectura y Apps
+# Arquitectura y Apps (Evita el error de 32-bit)
 TARGET_SUPPORTS_64_BIT_APPS := true
 TARGET_SUPPORTS_ARM_64_BIT_APPS := true
