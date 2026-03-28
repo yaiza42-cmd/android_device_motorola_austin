@@ -17,6 +17,10 @@ BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2 buildvariant=user
 BOARD_MKBOOTIMG_ARGS := --base $(BOARD_KERNEL_BASE) --pagesize $(BOARD_KERNEL_PAGESIZE) --cmdline "$(BOARD_KERNEL_CMDLINE)"
 
+# Kernel - Definición del binario (Añade esto)
+BOARD_KERNEL_IMAGE_NAME := Image.gz
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
+
 # Particiones Dinámicas y A/B
 AB_OTA_UPDATER := true
 # --- ESTO ES LO QUE SOLUCIONA EL ERROR FAILED: AB_OTA_PARTITIONS ---
