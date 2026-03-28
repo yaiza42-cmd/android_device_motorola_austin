@@ -46,6 +46,15 @@ TARGET_RECOVERY_ROOT_OUT := out/target/product/austin/recovery/root
 BOARD_ROOT_EXTRA_FOLDERS := bluetooth metadata postinstall
 BOARD_HAS_NO_VENDOR_PARTITION := true
 
+# --- SOLUCIÓN "DIRECTORIO FANTASMA" ---
+
+# Forzamos que el sistema sepa que no hay una carpeta root real
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
+BOARD_USES_RECOVERY_AS_BOOT := true
+
+# Creamos una variable para simplificar la creación del directorio
+TARGET_RECOVERY_ROOT_OUT := out/target/product/austin/recovery/root
+
 # Configuración A/B y sistema unificado
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 BOARD_USES_RECOVERY_AS_BOOT := true
