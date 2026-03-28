@@ -11,76 +11,59 @@ TARGET_BOARD_PLATFORM := mt6833
 TARGET_BOOTLOADER_BOARD_NAME := mt6833
 TARGET_NO_BOOTLOADER := true
 
-# Configuración del Kernel (Sacada de tu AIK)
+# --- CONFIGURACIÓN DEL KERNEL & BOOT HEADER ---
 BOARD_KERNEL_BASE := 0x40078000
 BOARD_KERNEL_PAGESIZE := 2048
+BOARD_BOOT_HEADER_VERSION := 2
 BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2 buildvariant=user
-BOARD_MKBOOTIMG_ARGS := --base $(BOARD_KERNEL_BASE) --pagesize $(BOARD_KERNEL_PAGESIZE) --cmdline "$(BOARD_KERNEL_CMDLINE)"
 
-# Kernel
+# Unimos todos los argumentos para mkbootimg (Header 2 es vital aquí)
+BOARD_MKBOOTIMG_ARGS := --base $(BOARD_KERNEL_BASE) --pagesize $(BOARD_KERNEL_PAGESIZE) --cmdline "$(BOARD_KERNEL_CMDLINE)" --header_version $(BOARD_BOOT_HEADER_VERSION)
+
+# Kernel y DTB
 BOARD_KERNEL_IMAGE_NAME := Image.gz
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
 BOARD_PREBUILT_DTBIMAGE_PATH := $(DEVICE_PATH)/prebuilt/boot.img-dtb
-
-# Solución al error mkbootimg (Intento #22)
 BOARD_INCLUDE_RECOVERY_DTBO := true
 BOARD_PREBUILT_RECOVERY_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/boot.img-dtb
 
-# --- AJUSTE DE TAMAÑO (INTENTO #23) ---
-# Definimos 40MB (41943040 bytes) para que deje de dar el error "too large ( > 0)"
+# --- AJUSTE DE SEGURIDAD AVB (SACADO DE TU INFO) ---
+# Usamos una fecha ligeramente superior a la original para saltar el Anti-Rollback
+BOARD_OS_VERSION := 12
+BOARD_OS_PATCH_LEVEL := 2025-04-05
+BOARD_AVB_ENABLE := true
+BOARD_AVB_ROLLBACK_INDEX := 0
+BOARD_AVB_MAKE_VBMETA_IMAGE_SYSTEM_PROPERTY := true
+
+# Tamaño de partición (40MB exactos)
 BOARD_BOOTIMAGE_PARTITION_SIZE := 41943040
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 41943040
-BOARD_HAS_NO_RECOVERY := true
 
-# Particiones Dinámicas y A/B
+# --- CONFIGURACIÓN A/B Y RAMDISK ---
 AB_OTA_UPDATER := true
-# --- ESTO ES LO QUE SOLUCIONA EL ERROR FAILED: AB_OTA_PARTITIONS ---
 AB_OTA_PARTITIONS := boot system system_ext product vendor vbmeta
 BOARD_USES_RECOVERY_AS_BOOT := true
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
+TARGET_NO_RECOVERY := false
 
-# --- AJUSTE FINAL (INTENTO #21) ---
-
-# Inyectamos solo los archivos que el sistema NO genera solo
-# Eliminamos vendor_file_contexts de aquí para evitar el error de duplicidad
+# Archivos críticos para MediaTek
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/init.recovery.mt6833.rc:recovery/root/init.recovery.mt6833.rc \
     $(DEVICE_PATH)/prop.default:recovery/root/prop.default \
     $(DEVICE_PATH)/ueventd.rc:recovery/root/ueventd.rc
 
-# PERMITIR REGLAS DUPLICADAS (Esto mata el error de ckati)
 BUILD_BROKEN_DUP_RULES := true
 
-# Forzar la creación de la ruta que rsync está buscando
-TARGET_RECOVERY_ROOT_OUT := out/target/product/austin/recovery/root
-BOARD_ROOT_EXTRA_FOLDERS := bluetooth metadata postinstall
-BOARD_HAS_NO_VENDOR_PARTITION := true
-
-# --- SOLUCIÓN "DIRECTORIO FANTASMA" ---
-
-# Forzamos que el sistema sepa que no hay una carpeta root real
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
-BOARD_USES_RECOVERY_AS_BOOT := true
-
-# --- EL "KILLER" DEL ERROR RSYNC ---
-# Este comando crea la carpeta físicamente durante la fase de lectura del config.
+# Solución Directorio Fantasma para rsync
 $(shell mkdir -p $(OUT_DIR)/target/product/austin/root)
 $(shell mkdir -p out/target/product/austin/root)
-
-# Creamos una variable para simplificar la creación del directorio
 TARGET_RECOVERY_ROOT_OUT := out/target/product/austin/recovery/root
 
-# Configuración A/B y sistema unificado
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
-BOARD_USES_RECOVERY_AS_BOOT := true
-TARGET_NO_RECOVERY := false
+# Particiones Dinámicas
 BOARD_SUPER_PARTITION_SIZE := 9126805504
 BOARD_SUPER_PARTITION_GROUPS := motorola_dynamic_partitions
 BOARD_MOTOROLA_DYNAMIC_PARTITIONS_SIZE := 8589934592
 BOARD_MOTOROLA_DYNAMIC_PARTITIONS_PARTITION_LIST := system system_ext product vendor
-
-# Arquitectura y Apps
-TARGET_SUPPORTS_64_BIT_APPS := true
-TARGET_SUPPORTS_ARM_64_BIT_APPS := true
 
 # TWRP Graphics
 TARGET_SCREEN_WIDTH := 720
