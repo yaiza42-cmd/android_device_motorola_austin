@@ -29,14 +29,17 @@ AB_OTA_UPDATER := true
 AB_OTA_PARTITIONS := boot system system_ext product vendor vbmeta
 BOARD_USES_RECOVERY_AS_BOOT := true
 
-# --- SOLUCIÓN DEFINITIVA PARA ERROR RSYNC (INTENTO #19) ---
+# --- AJUSTE FINAL (INTENTO #20) ---
 
-# Inyectar archivos directamente en la ramdisk de recuperación
+# Inyectamos solo los archivos que el sistema NO genera solo
+# Eliminamos vendor_file_contexts de aquí para evitar el error de duplicidad
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/init.recovery.mt6833.rc:recovery/root/init.recovery.mt6833.rc \
     $(DEVICE_PATH)/prop.default:recovery/root/prop.default \
-    $(DEVICE_PATH)/ueventd.rc:recovery/root/ueventd.rc \
-    $(DEVICE_PATH)/vendor_file_contexts:recovery/root/vendor_file_contexts
+    $(DEVICE_PATH)/ueventd.rc:recovery/root/ueventd.rc
+
+# PERMITIR REGLAS DUPLICADAS (Esto mata el error de ckati)
+BUILD_BROKEN_DUP_RULES := true
 
 # Forzar la creación de la ruta que rsync está buscando
 TARGET_RECOVERY_ROOT_OUT := out/target/product/austin/recovery/root
@@ -47,7 +50,6 @@ BOARD_HAS_NO_VENDOR_PARTITION := true
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 BOARD_USES_RECOVERY_AS_BOOT := true
 TARGET_NO_RECOVERY := false
-
 BOARD_SUPER_PARTITION_SIZE := 9126805504
 BOARD_SUPER_PARTITION_GROUPS := motorola_dynamic_partitions
 BOARD_MOTOROLA_DYNAMIC_PARTITIONS_SIZE := 8589934592
