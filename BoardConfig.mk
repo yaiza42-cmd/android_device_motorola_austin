@@ -20,3 +20,6 @@ BOARD_MKBOOTIMG_ARGS := --base $(BOARD_KERNEL_BASE) --pagesize $(BOARD_KERNEL_PA
 # Particiones Dinámicas y A/B
 AB_OTA_UPDATER := true
 BOARD_SUPER_PARTITION_GROUPS := motorola_dynamic_partitions
+# Arquitectura y Apps
+TARGET_SUPPORTS_64_BIT_APPS := true
+TARGET_SUPPORTS_ARM_64_BIT_APPS := true
