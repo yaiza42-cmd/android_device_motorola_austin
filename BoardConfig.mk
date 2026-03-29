@@ -33,12 +33,12 @@ BOARD_KERNEL_IMAGE_NAME := Image.gz
 BOARD_INCLUDE_RECOVERY_DTBO := true
 BOARD_PREBUILT_RECOVERY_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtb
 
-# --- CLONACIÓN EXACTA DE AVB (BASADO EN TU LOG) ---
+# --- CLONACIÓN EXACTA DE AVB PARA SALTOS DE ANTI-ROLLBACK ---
 BOARD_AVB_ENABLE := true
 BOARD_AVB_ROLLBACK_INDEX := 0
 BOARD_AVB_MAKE_VBMETA_IMAGE_SYSTEM_PROPERTY := true
 
-# Inyectamos los metadatos idénticos al original para engañar al bootloader
+# Inyectamos los metadatos EXACTOS de tu log de AVB Verification
 BOARD_AVB_BOOT_ADD_HASH_FOOTER_ARGS := \
     --prop com.android.build.boot.fingerprint:motorola/austin_g/austin:12/T1SAS33.73-40-0-12-20/4dabf:user/release-keys \
     --prop com.android.build.boot.os_version:12 \
@@ -55,15 +55,16 @@ BOARD_USES_RECOVERY_AS_BOOT := true
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 TARGET_NO_RECOVERY := false
 
-# Archivos críticos
+# --- FIX: ELIMINADAS COPIAS CONFLICTIVAS ---
+# Solo dejamos el init.recovery.mt6833.rc si es indispensable
 PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/init.recovery.mt6833.rc:recovery/root/init.recovery.mt6833.rc \
-    $(DEVICE_PATH)/prop.default:recovery/root/prop.default \
-    $(DEVICE_PATH)/ueventd.rc:recovery/root/ueventd.rc
+    $(DEVICE_PATH)/init.recovery.mt6833.rc:recovery/root/init.recovery.mt6833.rc
 
-# Solución Directorio Fantasma
-$(shell mkdir -p $(OUT_DIR)/target/product/austin/root)
-$(shell mkdir -p out/target/product/austin/root)
+# Permitimos que se ignoren reglas duplicadas para evitar el error de Kati
+BUILD_BROKEN_DUP_RULES := true
+
+# Solución Directorio Fantasma para rsync
+$(shell mkdir -p out/target/product/austin/recovery/root)
 
 # TWRP Graphics
 TARGET_SCREEN_WIDTH := 720
