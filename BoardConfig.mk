@@ -11,14 +11,26 @@ TARGET_BOARD_PLATFORM := mt6833
 TARGET_BOOTLOADER_BOARD_NAME := mt6833
 TARGET_NO_BOOTLOADER := true
 
-# --- CONFIGURACIÓN DEL KERNEL & BOOT HEADER ---
+# --- CONFIGURACIÓN DEL KERNEL (DATOS EXACTOS DE AIK) ---
 BOARD_KERNEL_BASE := 0x40078000
-BOARD_KERNEL_PAGESIZE := 2048
+BOARD_PAGE_SIZE := 2048
+BOARD_KERNEL_OFFSET := 0x00008000
+BOARD_RAMDISK_OFFSET := 0x11088000
+BOARD_TAGS_OFFSET := 0x07c08000
+BOARD_DTB_OFFSET := 0x07c08000
 BOARD_BOOT_HEADER_VERSION := 2
 BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2 buildvariant=user
 
-# Unimos todos los argumentos para mkbootimg (Header 2 es vital aquí)
-BOARD_MKBOOTIMG_ARGS := --base $(BOARD_KERNEL_BASE) --pagesize $(BOARD_KERNEL_PAGESIZE) --cmdline "$(BOARD_KERNEL_CMDLINE)" --header_version $(BOARD_BOOT_HEADER_VERSION)
+# Unimos los argumentos para mkbootimg incluyendo los Offsets y el Hash sha1
+BOARD_MKBOOTIMG_ARGS := --base $(BOARD_KERNEL_BASE) \
+    --pagesize $(BOARD_PAGE_SIZE) \
+    --kernel_offset $(BOARD_KERNEL_OFFSET) \
+    --ramdisk_offset $(BOARD_RAMDISK_OFFSET) \
+    --tags_offset $(BOARD_TAGS_OFFSET) \
+    --dtb_offset $(BOARD_DTB_OFFSET) \
+    --header_version $(BOARD_BOOT_HEADER_VERSION) \
+    --cmdline "$(BOARD_KERNEL_CMDLINE)" \
+    --hashtype sha1
 
 # Kernel y DTB
 BOARD_KERNEL_IMAGE_NAME := Image.gz
@@ -27,15 +39,14 @@ BOARD_PREBUILT_DTBIMAGE_PATH := $(DEVICE_PATH)/prebuilt/boot.img-dtb
 BOARD_INCLUDE_RECOVERY_DTBO := true
 BOARD_PREBUILT_RECOVERY_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/boot.img-dtb
 
-# --- AJUSTE DE SEGURIDAD AVB (SACADO DE TU INFO) ---
-# Usamos una fecha ligeramente superior a la original para saltar el Anti-Rollback
-BOARD_OS_VERSION := 12
-BOARD_OS_PATCH_LEVEL := 2025-04-05
+# --- AJUSTE DE SEGURIDAD AVB (SEGÚN AIK) ---
+BOARD_OS_VERSION := 12.0.0
+BOARD_OS_PATCH_LEVEL := 2025-04-01
 BOARD_AVB_ENABLE := true
 BOARD_AVB_ROLLBACK_INDEX := 0
 BOARD_AVB_MAKE_VBMETA_IMAGE_SYSTEM_PROPERTY := true
 
-# Tamaño de partición (40MB exactos)
+# Tamaño de partición (40MB exactos: 41943040 bytes)
 BOARD_BOOTIMAGE_PARTITION_SIZE := 41943040
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 41943040
 
@@ -46,7 +57,7 @@ BOARD_USES_RECOVERY_AS_BOOT := true
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 TARGET_NO_RECOVERY := false
 
-# Archivos críticos para MediaTek
+# Inyectamos archivos críticos
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/init.recovery.mt6833.rc:recovery/root/init.recovery.mt6833.rc \
     $(DEVICE_PATH)/prop.default:recovery/root/prop.default \
