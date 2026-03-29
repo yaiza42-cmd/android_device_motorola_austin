@@ -18,3 +18,6 @@ TARGET_SCREEN_WIDTH := 720
 TARGET_SCREEN_HEIGHT := 1600
 TW_THEME := portrait_hdpi
 TW_DEFAULT_LANGUAGE := es
+# Forzar instalación en la partición boot (Dispositivos A/B)
+FOX_RECOVERY_INSTALL_PARTITION := /dev/block/by-name/boot
+FOX_RECOVERY_SYSTEM_PARTITION := /dev/block/by-name/system
