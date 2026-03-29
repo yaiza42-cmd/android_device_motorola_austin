@@ -33,18 +33,20 @@ BOARD_KERNEL_IMAGE_NAME := Image.gz
 BOARD_INCLUDE_RECOVERY_DTBO := true
 BOARD_PREBUILT_RECOVERY_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtb
 
-# --- AVB Y ANTI-ROLLBACK (CON DATOS DE LA ROM OFICIAL) ---
+# --- CONFIGURACIÓN DE SEGURIDAD AVB (ESTILO MOTOROLA) ---
 BOARD_AVB_ENABLE := true
 BOARD_AVB_MAKE_VBMETA_IMAGE_SYSTEM_PROPERTY := true
-BOARD_AVB_ROLLBACK_INDEX := 39
-BOARD_AVB_BOOT_ROLLBACK_INDEX_LOCATION := 1
 
+# Si el original dice 0, pongamos 0 para no forzar el ARB innecesariamente
+BOARD_AVB_ROLLBACK_INDEX := 0
+BOARD_AVB_BOOT_ROLLBACK_INDEX_LOCATION := 0
+
+# Solo una propiedad, la original de Motorola. Sin duplicados.
 BOARD_AVB_BOOT_ADD_HASH_FOOTER_ARGS := \
     --prop com.android.build.boot.fingerprint:motorola/austin_g/austin:12/T1SAS33.73-40-0-12-20/4dabf:user/release-keys \
     --prop com.android.build.boot.os_version:12 \
     --prop com.android.build.boot.security_patch:2025-04-01 \
-    --prop com.motorola.build.hab.security_version:30 \
-    --rollback_index 39
+    --prop com.motorola.build.hab.security_version:30
 
 # Particiones y Tamaños (40MB)
 BOARD_BOOTIMAGE_PARTITION_SIZE := 41943040
