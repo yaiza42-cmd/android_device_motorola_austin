@@ -1,5 +1,5 @@
-# Heredar de la configuración base de OrangeFox (Rama 12.1)
-$(call inherit-product, vendor/otter/config/common.mk)
+# Probar esta ruta que es la estándar en el manifiesto 12.1
+$(call inherit-product, vendor/recovery/config/common.mk)
 
 # Identidad del dispositivo
 PRODUCT_DEVICE := austin
