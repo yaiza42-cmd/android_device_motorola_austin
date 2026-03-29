@@ -8,6 +8,17 @@ PRODUCT_BRAND := motorola
 PRODUCT_MODEL := Moto G 5G (2022)
 PRODUCT_MANUFACTURER := motorola
 
+# Forzar arquitectura 64 bits y compatibilidad
+TARGET_IS_64_BIT := true
+TARGET_SUPPORTS_64_BIT_APPS := true
+
+# Definir ABIs (esto quita el error de 32-bit-only)
+PRODUCT_CPU_ABI := arm64-v8a
+PRODUCT_CPU_ABI2 := 
+PRODUCT_CPU_ABI_LIST := arm64-v8a,armeabi-v7a,armeabi
+PRODUCT_CPU_ABI_LIST_64_BIT := arm64-v8a
+PRODUCT_CPU_ABI_LIST_32_BIT := armeabi-v7a,armeabi
+
 # --- INYECCIÓN MANUAL DE ORANGEFOX ---
 # Esto hace que OrangeFox se active aunque no encuentre el archivo de herencia
 FOX_VERSION := R11.1
