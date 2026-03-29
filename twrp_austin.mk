@@ -20,11 +20,11 @@ PRODUCT_CPU_ABI_LIST_64_BIT := arm64-v8a
 PRODUCT_CPU_ABI_LIST_32_BIT := armeabi-v7a,armeabi
 
 # --- INYECCIÓN MANUAL DE ORANGEFOX ---
-# Esto hace que OrangeFox se active aunque no encuentre el archivo de herencia
-FOX_VERSION := R11.1
+# Borramos FOX_VERSION porque es obsoleta en la rama 12.1
 FOX_BUILD_TYPE := Stable
 FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER := true
 OF_MAINTAINER := "Yaiza"
+FOX_MAINTAINER_PATCH_VERSION := 1
 ALLOW_MISSING_DEPENDENCIES := true
 
 # Pantalla y Apariencia
