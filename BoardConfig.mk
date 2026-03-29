@@ -36,8 +36,6 @@ BOARD_PREBUILT_RECOVERY_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtb
 # --- AVB Y ANTI-ROLLBACK (CON DATOS DE LA ROM OFICIAL) ---
 BOARD_AVB_ENABLE := true
 BOARD_AVB_MAKE_VBMETA_IMAGE_SYSTEM_PROPERTY := true
-
-# Suma de Anti-Rollback (39) para que el bootloader lo acepte
 BOARD_AVB_ROLLBACK_INDEX := 39
 BOARD_AVB_BOOT_ROLLBACK_INDEX_LOCATION := 1
 
@@ -48,31 +46,32 @@ BOARD_AVB_BOOT_ADD_HASH_FOOTER_ARGS := \
     --prop com.motorola.build.hab.security_version:30 \
     --rollback_index 39
 
-# Ajuste de tamaño de partición (40MB)
+# Particiones y Tamaños (40MB)
 BOARD_BOOTIMAGE_PARTITION_SIZE := 41943040
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 41943040
-
-# --- CONFIGURACIÓN A/B ---
 AB_OTA_UPDATER := true
 AB_OTA_PARTITIONS := boot system system_ext product vendor vbmeta
 BOARD_USES_RECOVERY_AS_BOOT := true
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 TARGET_NO_RECOVERY := false
 
-# --- FIX: ELIMINADAS COPIAS CONFLICTIVAS ---
+# --- FIX COMPILACIÓN ---
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/init.recovery.mt6833.rc:recovery/root/init.recovery.mt6833.rc
 
 BUILD_BROKEN_DUP_RULES := true
-
-# --- FIX RSYNC ERROR (CREACIÓN DE DIRECTORIOS FANTASMA) ---
-# Esto evita el "No such file or directory" en la fase final
-$(shell mkdir -p $(OUT_DIR)/target/product/austin/root)
 $(shell mkdir -p out/target/product/austin/root)
 $(shell mkdir -p out/target/product/austin/recovery/root)
-TARGET_RECOVERY_ROOT_OUT := out/target/product/austin/recovery/root
 
-# TWRP Graphics
+# --- FLAGS ESPECÍFICAS DE ORANGEFOX (NUEVO) ---
+FOX_RECOVERY_INSTALL_PARTITION := /dev/block/by-name/boot
+FOX_RECOVERY_SYSTEM_PARTITION := /dev/block/by-name/system
+TW_INCLUDE_CRYPTO := true
+TW_INCLUDE_FBE := true
+FOX_USE_NANO_EDITOR := 1
+ALLOW_MISSING_DEPENDENCIES := true
+
+# Gráficos
 TARGET_SCREEN_WIDTH := 720
 TARGET_SCREEN_HEIGHT := 1600
 TW_THEME := portrait_hdpi
