@@ -9,6 +9,13 @@ TARGET_BOARD_PLATFORM := mt6833
 TARGET_BOOTLOADER_BOARD_NAME := mt6833
 TARGET_NO_BOOTLOADER := true
 
+# ¡Esta parte es la que evita conflictos con el mk que acabas de hacer!
+TARGET_2ND_ARCH := arm
+TARGET_2ND_ARCH_VARIANT := armv8-a
+TARGET_2ND_CPU_ABI := armeabi-v7a
+TARGET_2ND_CPU_ABI2 := armeabi
+TARGET_2ND_CPU_VARIANT := generic
+
 # --- CONFIGURACIÓN DEL KERNEL (SEGÚN AIK) ---
 BOARD_KERNEL_BASE := 0x40078000
 BOARD_PAGE_SIZE := 2048
