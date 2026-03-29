@@ -21,16 +21,12 @@ BOARD_DTB_OFFSET := 0x07c08000
 BOARD_BOOT_HEADER_VERSION := 2
 BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2 buildvariant=user
 
-# Unimos los argumentos para mkbootimg incluyendo los Offsets y el Hash sha1
-BOARD_MKBOOTIMG_ARGS := --base $(BOARD_KERNEL_BASE) \
-    --pagesize $(BOARD_PAGE_SIZE) \
-    --kernel_offset $(BOARD_KERNEL_OFFSET) \
+# Solo ponemos en ARGS lo que el sistema no añade por defecto
+BOARD_MKBOOTIMG_ARGS := --kernel_offset $(BOARD_KERNEL_OFFSET) \
     --ramdisk_offset $(BOARD_RAMDISK_OFFSET) \
     --tags_offset $(BOARD_TAGS_OFFSET) \
     --dtb_offset $(BOARD_DTB_OFFSET) \
-    --header_version $(BOARD_BOOT_HEADER_VERSION) \
-    --cmdline "$(BOARD_KERNEL_CMDLINE)" \
-    --hashtype sha1
+    --header_version $(BOARD_BOOT_HEADER_VERSION)
 
 # Kernel y DTB
 BOARD_KERNEL_IMAGE_NAME := Image.gz
@@ -39,16 +35,17 @@ BOARD_PREBUILT_DTBIMAGE_PATH := $(DEVICE_PATH)/prebuilt/boot.img-dtb
 BOARD_INCLUDE_RECOVERY_DTBO := true
 BOARD_PREBUILT_RECOVERY_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/boot.img-dtb
 
-# --- AJUSTE DE SEGURIDAD AVB (SEGÚN AIK) ---
+# --- SEGURIDAD AVB (AJUSTADA PARA EVITAR EL ROLLBACK) ---
 BOARD_OS_VERSION := 12.0.0
 BOARD_OS_PATCH_LEVEL := 2025-04-01
 BOARD_AVB_ENABLE := true
 BOARD_AVB_ROLLBACK_INDEX := 0
 BOARD_AVB_MAKE_VBMETA_IMAGE_SYSTEM_PROPERTY := true
 
-# Tamaño de partición (40MB exactos: 41943040 bytes)
+# Tamaño de partición (40MB exactos)
 BOARD_BOOTIMAGE_PARTITION_SIZE := 41943040
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 41943040
+BOARD_HAS_NO_RECOVERY := true
 
 # --- CONFIGURACIÓN A/B Y RAMDISK ---
 AB_OTA_UPDATER := true
@@ -57,7 +54,7 @@ BOARD_USES_RECOVERY_AS_BOOT := true
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 TARGET_NO_RECOVERY := false
 
-# Inyectamos archivos críticos
+# Archivos de MediaTek
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/init.recovery.mt6833.rc:recovery/root/init.recovery.mt6833.rc \
     $(DEVICE_PATH)/prop.default:recovery/root/prop.default \
@@ -65,7 +62,7 @@ PRODUCT_COPY_FILES += \
 
 BUILD_BROKEN_DUP_RULES := true
 
-# Solución Directorio Fantasma para rsync
+# "Directorio Fantasma" para rsync
 $(shell mkdir -p $(OUT_DIR)/target/product/austin/root)
 $(shell mkdir -p out/target/product/austin/root)
 TARGET_RECOVERY_ROOT_OUT := out/target/product/austin/recovery/root
