@@ -1,5 +1,5 @@
 # Probar esta ruta que es la estándar en el manifiesto 12.1
-$(call inherit-product, vendor/fox/config/common.mk)
+$(call inherit-product, vendor/recovery/orangefox.mk)
 
 # Identidad del dispositivo
 PRODUCT_DEVICE := austin
