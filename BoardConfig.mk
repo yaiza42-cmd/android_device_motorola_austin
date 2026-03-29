@@ -33,16 +33,20 @@ BOARD_KERNEL_IMAGE_NAME := Image.gz
 BOARD_INCLUDE_RECOVERY_DTBO := true
 BOARD_PREBUILT_RECOVERY_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtb
 
-# --- CLONACIÓN EXACTA DE AVB PARA SALTOS DE ANTI-ROLLBACK ---
+# --- AVB Y ANTI-ROLLBACK (CON DATOS DE LA ROM OFICIAL) ---
 BOARD_AVB_ENABLE := true
-BOARD_AVB_ROLLBACK_INDEX := 0
 BOARD_AVB_MAKE_VBMETA_IMAGE_SYSTEM_PROPERTY := true
 
-# Inyectamos los metadatos EXACTOS de tu log de AVB Verification
+# Suma de Anti-Rollback (39) para que el bootloader lo acepte
+BOARD_AVB_ROLLBACK_INDEX := 39
+BOARD_AVB_BOOT_ROLLBACK_INDEX_LOCATION := 1
+
 BOARD_AVB_BOOT_ADD_HASH_FOOTER_ARGS := \
     --prop com.android.build.boot.fingerprint:motorola/austin_g/austin:12/T1SAS33.73-40-0-12-20/4dabf:user/release-keys \
     --prop com.android.build.boot.os_version:12 \
-    --prop com.android.build.boot.security_patch:2025-04-01
+    --prop com.android.build.boot.security_patch:2025-04-01 \
+    --prop com.motorola.build.hab.security_version:30 \
+    --rollback_index 39
 
 # Ajuste de tamaño de partición (40MB)
 BOARD_BOOTIMAGE_PARTITION_SIZE := 41943040
@@ -56,15 +60,17 @@ BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 TARGET_NO_RECOVERY := false
 
 # --- FIX: ELIMINADAS COPIAS CONFLICTIVAS ---
-# Solo dejamos el init.recovery.mt6833.rc si es indispensable
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/init.recovery.mt6833.rc:recovery/root/init.recovery.mt6833.rc
 
-# Permitimos que se ignoren reglas duplicadas para evitar el error de Kati
 BUILD_BROKEN_DUP_RULES := true
 
-# Solución Directorio Fantasma para rsync
+# --- FIX RSYNC ERROR (CREACIÓN DE DIRECTORIOS FANTASMA) ---
+# Esto evita el "No such file or directory" en la fase final
+$(shell mkdir -p $(OUT_DIR)/target/product/austin/root)
+$(shell mkdir -p out/target/product/austin/root)
 $(shell mkdir -p out/target/product/austin/recovery/root)
+TARGET_RECOVERY_ROOT_OUT := out/target/product/austin/recovery/root
 
 # TWRP Graphics
 TARGET_SCREEN_WIDTH := 720
