@@ -96,3 +96,8 @@ PLATFORM_SECURITY_PATCH := 2025-04-01
 
 # --- FIX COMPILACIÓN ---
 BUILD_BROKEN_DUP_RULES := true
+
+# FIX: Prevenir error de rsync (No such file or directory)
+$(shell mkdir -p $(OUT_DIR)/target/product/austin/root)
+$(shell mkdir -p $(PRODUCT_OUT)/root)
+$(shell mkdir -p $(PRODUCT_OUT)/recovery/root)
