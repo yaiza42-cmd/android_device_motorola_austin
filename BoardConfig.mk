@@ -9,56 +9,64 @@ TARGET_BOARD_PLATFORM := mt6833
 TARGET_BOOTLOADER_BOARD_NAME := mt6833
 TARGET_NO_BOOTLOADER := true
 
-# Arquitectura Secundaria (Necesaria para binarios de 32 bits)
+# Arquitectura Secundaria (32 bits)
 TARGET_2ND_ARCH := arm
 TARGET_2ND_ARCH_VARIANT := armv8-a
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := generic
 
-# --- CONFIGURACIÓN DEL KERNEL (EXTRACCIÓN AIK) ---
+# --- KERNEL ---
 BOARD_KERNEL_BASE := 0x40078000
 BOARD_PAGE_SIZE := 2048
 BOARD_KERNEL_OFFSET := 0x00008000
 BOARD_RAMDISK_OFFSET := 0x11088000
 BOARD_TAGS_OFFSET := 0x07c08000
-BOARD_DTB_OFFSET := 0x07c08000
 BOARD_BOOT_HEADER_VERSION := 4
 BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2 buildvariant=user
 
-# Imagenes Pre-compiladas (Kernel, DTB y DTBO)
+# Prebuilt kernel / dtbo
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
 BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo
-BOARD_INCLUDE_RECOVERY_DTBO := true
 BOARD_KERNEL_IMAGE_NAME := Image.gz
 
-# Argumentos de Construcción (Header v4 es Vital para Android 12)
-BOARD_MKBOOTIMG_ARGS := --kernel_offset $(BOARD_KERNEL_OFFSET) \
+# IMPORTANTE: evitar conflictos de dtb
+BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+
+# mkbootimg args (más limpio y seguro)
+BOARD_MKBOOTIMG_ARGS := \
+    --kernel_offset $(BOARD_KERNEL_OFFSET) \
     --ramdisk_offset $(BOARD_RAMDISK_OFFSET) \
     --tags_offset $(BOARD_TAGS_OFFSET) \
-    --dtb_offset $(BOARD_DTB_OFFSET) \
-    --header_version $(BOARD_BOOT_HEADER_VERSION) \
-    --dtb $(DEVICE_PATH)/prebuilt/dtb
+    --header_version $(BOARD_BOOT_HEADER_VERSION)
 
-# --- PARTICIONES Y ALMACENAMIENTO ---
+# --- PARTICIONES ---
 BOARD_BOOTIMAGE_PARTITION_SIZE := 41943040
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 41943040
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_SYSTEMIMAGE_PARTITION_TYPE := ext4
 BOARD_USERDATAIMAGE_PARTITION_TYPE := f2fs
 
-# --- CONFIGURACIÓN A/B Y VIRTUAL A/B (MOTOROLA MODERNOS) ---
+# --- A/B + DYNAMIC PARTITIONS ---
 AB_OTA_UPDATER := true
 AB_OTA_PARTITIONS := boot system system_ext product vendor vbmeta
+
 BOARD_USES_RECOVERY_AS_BOOT := true
 BOARD_HAS_FIRST_STAGE_RAMDISK := true
 BOARD_VIRTUAL_AB_DEVICE := true
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
+
+# 🔥 FIX CRÍTICO
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
+
 TARGET_NO_RECOVERY := true
 
-# --- SEGURIDAD Y VERIFICACIÓN AVB ---
+# --- FSTAB ---
+TARGET_RECOVERY_FSTAB := device/motorola/austin/recovery.fstab
+
+# --- SEPOLICY (OBLIGATORIO PARA BOOT) ---
+BOARD_SEPOLICY_DIRS += device/motorola/austin/sepolicy
+
+# --- AVB ---
 BOARD_AVB_ENABLE := true
-BOARD_AVB_MAKE_VBMETA_IMAGE_SYSTEM_PROPERTY := true
 BOARD_AVB_ROLLBACK_INDEX := 0
 BOARD_AVB_BOOT_ROLLBACK_INDEX_LOCATION := 0
 
@@ -68,7 +76,7 @@ BOARD_AVB_BOOT_ADD_HASH_FOOTER_ARGS := \
     --prop com.android.build.boot.security_patch:2025-04-01 \
     --prop com.motorola.build.hab.security_version:30
 
-# --- MÓDULOS Y BINARIOS CRÍTICOS (NUEVO) ---
+# --- BINARIOS RECOVERY ---
 TARGET_RECOVERY_DEVICE_MODULES += \
     bash \
     resetprop \
@@ -76,28 +84,31 @@ TARGET_RECOVERY_DEVICE_MODULES += \
     tune2fs \
     e2fsck
 
-# --- INTERFAZ Y GRÁFICOS ---
+# --- UI ---
 TARGET_SCREEN_WIDTH := 720
 TARGET_SCREEN_HEIGHT := 1600
 TW_THEME := portrait_hdpi
-TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
+TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 TW_MAX_BRIGHTNESS := 255
 
-# --- FLAGS ESPECÍFICAS DE ORANGEFOX ---
+# --- ORANGEFOX ---
 OF_AB_DEVICE := true
 OF_VIRTUAL_AB_DEVICE := true
 OF_USE_MAGISKBOOT := true
+
 TW_INCLUDE_CRYPTO := true
 TW_INCLUDE_FBE := true
+
 FOX_USE_NANO_EDITOR := 1
+
+# --- BUILD ---
 ALLOW_MISSING_DEPENDENCIES := true
+BUILD_BROKEN_DUP_RULES := true
+
 PLATFORM_VERSION := 12
 PLATFORM_SECURITY_PATCH := 2025-04-01
 
-# --- FIX COMPILACIÓN ---
-BUILD_BROKEN_DUP_RULES := true
-
-# FIX: Prevenir error de rsync (No such file or directory)
+# --- FIX DIRECTORIOS ---
 $(shell mkdir -p $(OUT_DIR)/target/product/austin/root)
 $(shell mkdir -p $(PRODUCT_OUT)/root)
 $(shell mkdir -p $(PRODUCT_OUT)/recovery/root)
