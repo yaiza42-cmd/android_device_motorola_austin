@@ -1,13 +1,13 @@
-# Logical Partitions (Super)
-system      /system     ext4    ro      wait,slotselect,logical
-vendor      /vendor     ext4    ro      wait,slotselect,logical
-product     /product    ext4    ro      wait,slotselect,logical
-system_ext  /system_ext ext4    ro      wait,slotselect,logical
+# Logical Partitions (Super) - Soporte Virtual A/B
+/system         ext4    system      ro    wait,slotselect,logical,first_stage_mount
+/vendor         ext4    vendor      ro    wait,slotselect,logical,first_stage_mount
+/product        ext4    product     ro    wait,slotselect,logical,first_stage_mount
+/system_ext     ext4    system_ext  ro    wait,slotselect,logical,first_stage_mount
 
 # Physical Partitions
-/dev/block/by-name/metadata    /metadata   ext4    noatime,nosuid,nodev,discard wait,check,formattable
-/dev/block/by-name/userdata    /data       f2fs    noatime,nosuid,nodev,discard wait,check,formattable,fileencryption=aes-256-xts
-/dev/block/by-name/boot        /boot       emmc    defaults     slotselect
-/dev/block/by-name/misc        /misc       emmc    defaults     defaults
-/dev/block/by-name/nvram       /nvram      emmc    defaults     defaults
-/dev/block/by-name/vbmeta      /vbmeta     emmc    defaults     defaults
+/dev/block/by-name/metadata    /metadata    ext4    noatime,nosuid,nodev,discard    wait,check,formattable
+/dev/block/by-name/userdata    /data        f2fs    noatime,nosuid,nodev,discard    wait,check,formattable,fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized,keydirectory=/metadata/vold/metadata_encryption
+/dev/block/by-name/boot        /boot        emmc    defaults    slotselect
+/dev/block/by-name/misc        /misc        emmc    defaults    defaults
+/dev/block/by-name/nvram       /nvram       emmc    defaults    defaults
+/dev/block/by-name/vbmeta      /vbmeta      emmc    defaults    defaults
