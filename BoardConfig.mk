@@ -59,8 +59,18 @@ TARGET_BOARD_PLATFORM := mt6833
 
 # A/B
 AB_OTA_UPDATER := true
+AB_OTA_PARTITIONS := \
+    boot \
+    product \
+    system \
+    system_ext \
+    vbmeta \
+    vbmeta_system \
+    vendor
+
 TARGET_NO_RECOVERY := true
 BOARD_USES_RECOVERY_AS_BOOT := true
+ENABLE_VIRTUAL_AB := true
 
 # kernel / mkbootimg args
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
