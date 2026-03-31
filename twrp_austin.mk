@@ -13,7 +13,39 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Intentamos la herencia universal de TWRP (Esta SIEMPRE existe en estos builders)
+
+# Release name
+PRODUCT_RELEASE_NAME := kyoto
+
+# Inherit from common AOSP
+$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+
+# Inherit GSI Keys
+$(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
+
+# Inherit Virtual A/B
+ENABLE_VIRTUAL_AB := true
+$(call inherit-product, build/make/target/product/virtual_ab_ota.mk)
+
+# Inherit from vendor/twrp
+$(call inherit-product, vendor/twrp/config/common.mk)
+
+# Inherit device configuration
+$(call inherit-product, device/motorola/kyoto/device.mk)
+
+PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,device/motorola/kyoto/recovery/root,recovery/root)
+PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,device/motorola/kyoto/prebuilt,prebuilt)
+PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,device/motorola/kyoto/prebuilt,out/target/product/kyoto/kernel/prebuilt)
+
+## Device identifier. This must come after all inclusions
+PRODUCT_NAME := twrp_austin
+PRODUCT_DEVICE := austin
+PRODUCT_MODEL := motorola moto G 5G 2022
+PRODUCT_BRAND := motorola
+PRODUCT_MANUFACTURER := motorola
+
+---------------------------------------------------------------------------------------------------------
 $(call inherit-product, vendor/twrp/config/common.mk)
 
 # Identidad del dispositivo
