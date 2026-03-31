@@ -86,11 +86,12 @@ BOARD_VIRTUAL_AB_DEVICE := true
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 TARGET_NO_RECOVERY := true
 
-# --- FSTAB ---
-TARGET_RECOVERY_FSTAB := device/motorola/austin/recovery.fstab
+# Partitions (listed in the file) to be wiped under recovery.
+TARGET_RECOVERY_WIPE := $(DEVICE_PATH)/recovery.wipe
 
-# --- SEPOLICY ---
-BOARD_SEPOLICY_DIRS += device/motorola/austin/sepolicy
+# System as root
+BOARD_ROOT_EXTRA_FOLDERS := metadata first_stage_ramdisk
+BOARD_SUPPRESS_SECURE_ERASE := true
 
 # --- AVB ---
 BOARD_AVB_ENABLE := true
