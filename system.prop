@@ -1,7 +1,7 @@
 #
 # DEVICE PROPS
 #
-ro.display.series="motorola edge 20 lite"
+ro.display.series="Motorola Moto G 5G 2022"
 ro.adb.secure=0
 ro.secure=0
 ro.debuggable=1
