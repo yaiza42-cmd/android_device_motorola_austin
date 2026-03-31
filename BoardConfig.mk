@@ -160,7 +160,7 @@ TW_USE_NEW_MINADBD := true
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 
 # Touchscreen Modules
-TW_LOAD_VENDOR_MODULES := "focaltech_mtk_mmi.ko mtk_tpd_mmi.ko sensors_class.ko" (ojo esto hay que modificarlo)
+TW_LOAD_VENDOR_MODULES := "ili9882_mmi.ko sensors_class.ko utags.ko mmi_info.ko"
 
 TW_NO_LEGACY_PROPS := true
 TW_NO_BIND_SYSTEM := true
