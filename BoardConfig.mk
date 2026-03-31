@@ -133,7 +133,7 @@ BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX_LOCATION := 1
 
 
 # Crypto A13
-PLATFORM_SECURITY_PATCH := 2127-12-31
+PLATFORM_SECURITY_PATCH := 2025-04-01
 VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 PLATFORM_VERSION := 99.87.36
 PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
@@ -144,8 +144,10 @@ TW_INCLUDE_CRYPTO := true
 TW_INCLUDE_FBE_METADATA_DECRYPT := true
 
 # TWRP specific build flags
-TW_DEVICE_VERSION := ForForkSake_XDA
+TW_DEVICE_VERSION := Yaiza_XDA
 TW_THEME := portrait_hdpi
+TARGET_SCREEN_WIDTH := 720
+TARGET_SCREEN_HEIGHT := 1600
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/config/usb_gadget/g1/functions/mass_storage.usb0/lun.%d/file"
@@ -158,7 +160,7 @@ TW_USE_NEW_MINADBD := true
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 
 # Touchscreen Modules
-TW_LOAD_VENDOR_MODULES := "focaltech_mtk_mmi.ko mtk_tpd_mmi.ko sensors_class.ko"
+TW_LOAD_VENDOR_MODULES := "focaltech_mtk_mmi.ko mtk_tpd_mmi.ko sensors_class.ko" (ojo esto hay que modificarlo)
 
 TW_NO_LEGACY_PROPS := true
 TW_NO_BIND_SYSTEM := true
