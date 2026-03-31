@@ -25,20 +25,22 @@ BOARD_TAGS_OFFSET := 0x07c08000
 BOARD_BOOT_HEADER_VERSION := 2
 BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2 buildvariant=user
 
-# Prebuilt kernel / dtbo
+# Prebuilt kernel / dtbo / dtb
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
 BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo
+TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb
 BOARD_KERNEL_IMAGE_NAME := Image.gz
 
-# IMPORTANTE: evitar conflictos de dtb
+# FIX: Esto indica a Ninja que el archivo dtb ya existe en la ruta de arriba
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 
-# mkbootimg args (más limpio y seguro)
+# mkbootimg args (Corregidos para incluir el flag --dtb)
 BOARD_MKBOOTIMG_ARGS := \
     --kernel_offset $(BOARD_KERNEL_OFFSET) \
     --ramdisk_offset $(BOARD_RAMDISK_OFFSET) \
     --tags_offset $(BOARD_TAGS_OFFSET) \
-    --header_version $(BOARD_BOOT_HEADER_VERSION)
+    --header_version $(BOARD_BOOT_HEADER_VERSION) \
+    --dtb $(TARGET_PREBUILT_DTB)
 
 # --- PARTICIONES ---
 BOARD_BOOTIMAGE_PARTITION_SIZE := 41943040
@@ -54,15 +56,14 @@ BOARD_USES_RECOVERY_AS_BOOT := true
 BOARD_HAS_FIRST_STAGE_RAMDISK := true
 BOARD_VIRTUAL_AB_DEVICE := true
 
-# 🔥 FIX CRÍTICO
+# FIX CRÍTICO
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
-
 TARGET_NO_RECOVERY := true
 
 # --- FSTAB ---
 TARGET_RECOVERY_FSTAB := device/motorola/austin/recovery.fstab
 
-# --- SEPOLICY (OBLIGATORIO PARA BOOT) ---
+# --- SEPOLICY ---
 BOARD_SEPOLICY_DIRS += device/motorola/austin/sepolicy
 
 # --- AVB ---
