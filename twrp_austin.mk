@@ -32,7 +32,7 @@ $(call inherit-product, build/make/target/product/virtual_ab_ota.mk)
 $(call inherit-product, vendor/twrp/config/common.mk)
 
 # Inherit device configuration
-$(call inherit-product, device/motorola/kyoto/device.mk)
+$(call inherit-product, vendor/twrp/config/common.mk)
 
 PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,device/motorola/kyoto/recovery/root,recovery/root)
 PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,device/motorola/kyoto/prebuilt,prebuilt)
@@ -43,16 +43,6 @@ PRODUCT_NAME := twrp_austin
 PRODUCT_DEVICE := austin
 PRODUCT_MODEL := motorola moto G 5G 2022
 PRODUCT_BRAND := motorola
-PRODUCT_MANUFACTURER := motorola
-
----------------------------------------------------------------------------------------------------------
-$(call inherit-product, vendor/twrp/config/common.mk)
-
-# Identidad del dispositivo
-PRODUCT_DEVICE := austin
-PRODUCT_NAME := twrp_austin
-PRODUCT_BRAND := motorola
-PRODUCT_MODEL := Moto G 5G (2022)
 PRODUCT_MANUFACTURER := motorola
 
 # Forzar arquitectura 64 bits y compatibilidad
@@ -87,3 +77,9 @@ FOX_RECOVERY_SYSTEM_PARTITION := /dev/block/by-name/system
 # Arquitectura
 PRODUCT_GMS_CLIENTID_BASE := android-motorola
 TARGET_IS_64_BIT := true
+
+
+
+
+
+
