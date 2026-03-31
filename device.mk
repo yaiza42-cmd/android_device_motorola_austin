@@ -38,7 +38,7 @@ AB_OTA_POSTINSTALL_CONFIG += \
 # fastbootd
 PRODUCT_PACKAGES += \
     fastbootd \
-    android.hardware.fastboot@1.0-impl-mock
+    android.hardware.fastboot@1.0-impl-mtk
 
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
