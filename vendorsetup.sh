@@ -39,8 +39,8 @@ export TW_DEFAULT_LANGUAGE="es" # Cambiado a español si prefieres
 	export FOX_DELETE_AROMAFM=1
 
 	# Magisk y Versión (Ajustado a Yaiza)
-	export FOX_MAINTAINER_PATCH_VERSION="R11.1_A12.1"
-	export OF_MAINTAINER="Alex_XDA"
+	export FOX_MAINTAINER_PATCH_VERSION="1"
+	export OF_MAINTAINER=Alex
 	
 	# Configuración de Pantalla para Austin (720x1600)
 	export OF_SCREEN_H=1600
