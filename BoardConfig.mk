@@ -147,7 +147,7 @@ VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 PLATFORM_VERSION := 99.87.36
 
 # Ajuste del nombre del Mantenedor
-TW_DEVICE_VERSION := Yaiza
+TW_DEVICE_VERSION := Alex
 
 # Extras y Compatibilidad Android 12.1
 TW_USE_TOOLBOX := true
