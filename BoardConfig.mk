@@ -128,11 +128,13 @@ TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
 TW_MAX_BRIGHTNESS := 255
 TW_DEFAULT_BRIGHTNESS := 100
 
-# Fix para el error de ev_init y ev_iterate_touch_inputs
+# Recovery UI Fixes
 TARGET_RECOVERY_UI_LIB := librecovery_ui_ext
 TARGET_RECOVERY_DEVICE_MODULES += librecovery_ui_ext
 TW_INPUT_BLACKLIST := "hbtp_vm"
-TW_SUPPORT_INPUT_1_2 := true
+
+# Forzar el uso de las cabeceras de eventos de OrangeFox
+common_global_cppflags += -DRECOVERY_INPUT_EVENT_RET_TYPE=int
 
 # Crypto
 BOARD_USES_METADATA_PARTITION := true
