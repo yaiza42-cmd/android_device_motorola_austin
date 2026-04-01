@@ -73,9 +73,11 @@ BOARD_USES_RECOVERY_AS_BOOT := true
 ENABLE_VIRTUAL_AB := true
 
 # Kernel / mkbootimg args
-# Verificado: archivos 'kernel' y 'dtb' en /prebuilt/
+# Kernel / DTB
+BOARD_KERNEL_IMAGE_NAME := kernel
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
 TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb
+BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 BOARD_PREBUILT_DTBIMAGE_DIR := $(DEVICE_PATH)/prebuilt
 
 BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2 buildvariant=user
