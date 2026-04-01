@@ -34,9 +34,9 @@ $(call inherit-product, vendor/twrp/config/common.mk)
 # Inherit device configuration
 $(call inherit-product, vendor/twrp/config/common.mk)
 
-PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,device/motorola/kyoto/recovery/root,recovery/root)
-PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,device/motorola/kyoto/prebuilt,prebuilt)
-PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,device/motorola/kyoto/prebuilt,out/target/product/kyoto/kernel/prebuilt)
+PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,device/motorola/austin/recovery/root,recovery/root)
+PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,device/motorola/austin/prebuilt,prebuilt)
+PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,device/motorola/austin/prebuilt,out/target/product/austin/kernel/prebuilt)
 
 ## Device identifier. This must come after all inclusions
 PRODUCT_NAME := twrp_austin
