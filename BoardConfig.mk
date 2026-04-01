@@ -73,7 +73,7 @@ BOARD_USES_RECOVERY_AS_BOOT := true
 ENABLE_VIRTUAL_AB := true
 
 # Kernel / mkbootimg args
-# ASEGÚRATE de que estos archivos existan en tu carpeta /prebuilt/
+# Verificado: archivos 'kernel' y 'dtb' en /prebuilt/
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
 TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb
 BOARD_PREBUILT_DTBIMAGE_DIR := $(DEVICE_PATH)/prebuilt
@@ -128,9 +128,11 @@ TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
 TW_MAX_BRIGHTNESS := 255
 TW_DEFAULT_BRIGHTNESS := 100
 
-# Esto arregla el error de ev_init
+# Fix para el error de ev_init y ev_iterate_touch_inputs
 TARGET_RECOVERY_UI_LIB := librecovery_ui_ext
+TARGET_RECOVERY_DEVICE_MODULES += librecovery_ui_ext
 TW_INPUT_BLACKLIST := "hbtp_vm"
+TW_SUPPORT_INPUT_1_2 := true
 
 # Crypto
 BOARD_USES_METADATA_PARTITION := true
@@ -140,20 +142,24 @@ PLATFORM_SECURITY_PATCH := 2025-04-01
 VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 PLATFORM_VERSION := 99.87.36
 
-# Ajuste del nombre del Mantenedor (Evita las comillas dobles en el código)
+# Ajuste del nombre del Mantenedor
 TW_DEVICE_VERSION := Yaiza
 
-# Extras
+# Extras y Compatibilidad Android 12.1
 TW_USE_TOOLBOX := true
 TW_INCLUDE_NTFS_3G := true
 TW_INCLUDE_RESETPROP := true
 TWRP_INCLUDE_LOGCAT := true
 TARGET_USES_LOGD := true
+TW_USE_NEW_MINADBD := true
+TW_EXCLUDE_APEX := true
+TW_NO_EXFAT_FUSE := true
 
 # Modulos de Touch
 TW_LOAD_VENDOR_MODULES := "ili9882_mmi.ko sensors_class.ko utags.ko mmi_info.ko"
 
-# Build Broken Rules (Permisivo para evitar fallos de Ninja)
+# Build Broken Rules
 BUILD_BROKEN_DUP_RULES := true
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 BUILD_BROKEN_MISSING_REQUIRED_MODULES := true
+BUILD_BROKEN_VINTF_PRODUCT_COPY_FILES := true
