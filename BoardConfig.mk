@@ -130,9 +130,7 @@ TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
 TW_MAX_BRIGHTNESS := 255
 TW_DEFAULT_BRIGHTNESS := 100
 
-# Recovery UI Fixes
-TARGET_RECOVERY_UI_LIB := librecovery_ui_ext
-TARGET_RECOVERY_DEVICE_MODULES += librecovery_ui_ext
+# Fix de pantalla táctil para Android 12.1 (Sin librerías legacy)
 TW_INPUT_BLACKLIST := "hbtp_vm"
 
 # Forzar el uso de las cabeceras de eventos de OrangeFox
