@@ -172,6 +172,10 @@ TW_INCLUDE_NTFS_3G := true
 TW_USE_NEW_MINADBD := true
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 
+# UI y Gráficos
+TARGET_RECOVERY_UI_LIB := librecovery_ui_default
+TARGET_RECOVERY_DEVICE_MODULES += librecovery_ui_ext
+
 # Touchscreen Modules
 TW_LOAD_VENDOR_MODULES := "ili9882_mmi.ko sensors_class.ko utags.ko mmi_info.ko"
 
