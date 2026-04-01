@@ -15,7 +15,7 @@
 #
 
 # Release name
-PRODUCT_RELEASE_NAME := kyoto
+PRODUCT_RELEASE_NAME := austin
 
 # Inherit from common AOSP
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
