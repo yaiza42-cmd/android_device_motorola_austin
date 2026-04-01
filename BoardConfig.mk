@@ -121,7 +121,7 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 41943040
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/recovery.fstab
 
-# UI Fixes para OrangeFox 12.1
+# Recovery UI Config & Fixes (Android 12.1 MTK)
 TW_THEME := portrait_hdpi
 TARGET_SCREEN_WIDTH := 720
 TARGET_SCREEN_HEIGHT := 1600
@@ -130,11 +130,14 @@ TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
 TW_MAX_BRIGHTNESS := 255
 TW_DEFAULT_BRIGHTNESS := 100
 
-# Fix de pantalla táctil para Android 12.1 (Sin librerías legacy)
+# Forzar el uso de la librería extendida y parches de C++
+TARGET_RECOVERY_UI_LIB := librecovery_ui_ext
+TARGET_RECOVERY_DEVICE_MODULES += librecovery_ui_ext
 TW_INPUT_BLACKLIST := "hbtp_vm"
+TW_SUPPORT_INPUT_1_2 := true
 
-# Forzar el uso de las cabeceras de eventos de OrangeFox
-common_global_cppflags += -DRECOVERY_INPUT_EVENT_RET_TYPE=int
+# Esta línea es CRÍTICA para arreglar el error de ev_init en Android 12
+TARGET_GLOBAL_CPPFLAGS += -DRECOVERY_INPUT_EVENT_RET_TYPE=int
 
 # Crypto
 BOARD_USES_METADATA_PARTITION := true
