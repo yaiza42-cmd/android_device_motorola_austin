@@ -172,6 +172,7 @@ TW_USE_TOOLBOX := true
 TW_INCLUDE_NTFS_3G := true
 TW_USE_NEW_MINADBD := true
 TW_EXCLUDE_DEFAULT_USB_INIT := true
+TARGET_RECOVERY_UI_LIB := librecovery_ui_default
 
 TW_NO_LEGACY_PROPS := true
 TW_NO_BIND_SYSTEM := true
@@ -196,3 +197,6 @@ BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 # Kernel module loading for touch, battery etc
 TW_LOAD_VENDOR_MODULES := $(shell echo \"$(shell ls $(DEVICE_PATH)/recovery/root/vendor/lib/modules/)\")
 TW_LOAD_VENDOR_BOOT_MODULES := true
+
+# Compatibilidad con minui antiguo (evitar nuevas rutas de UI)
+TW_USE_NEW_MINUI := false
