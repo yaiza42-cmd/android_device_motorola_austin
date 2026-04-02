@@ -169,9 +169,6 @@ TW_INCLUDE_NTFS_3G := true
 TW_USE_NEW_MINADBD := true
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 
-# Modulos de Touch
-TW_LOAD_VENDOR_MODULES := "ili9882_mmi.ko sensors_class.ko utags.ko mmi_info.ko"
-
 TW_NO_LEGACY_PROPS := true
 TW_NO_BIND_SYSTEM := true
 TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID := true
@@ -191,3 +188,7 @@ TARGET_USES_LOGD := true
 # Build Debug
 BUILD_BROKEN_DUP_RULES := true
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
+
+# Kernel module loading for touch, battery etc
+TW_LOAD_VENDOR_MODULES := $(shell echo \"$(shell ls $(DEVICE_PATH)/recovery/root/vendor/lib/modules/1.1)\")
+TW_LOAD_VENDOR_BOOT_MODULES := true
