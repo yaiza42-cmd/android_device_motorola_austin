@@ -136,8 +136,12 @@ TARGET_RECOVERY_DEVICE_MODULES += librecovery_ui_ext
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_SUPPORT_INPUT_1_2 := true
 
-# Esta línea es CRÍTICA para arreglar el error de ev_init en Android 12
- TARGET_GLOBAL_CLANG_CPPFLAGS += -DRECOVERY_INPUT_EVENT_RET_TYPE=int
+# Recovery UI Config & Fixes (Android 12.1 MTK)
+TARGET_RECOVERY_CPPFLAGS += -DRECOVERY_INPUT_EVENT_RET_TYPE=int
+
+# Forzar el uso de la librería extendida
+TARGET_RECOVERY_UI_LIB := librecovery_ui_ext
+TARGET_RECOVERY_DEVICE_MODULES += librecovery_ui_ext
 
 # Crypto
 BOARD_USES_METADATA_PARTITION := true
