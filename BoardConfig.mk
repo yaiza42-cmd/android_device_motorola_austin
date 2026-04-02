@@ -56,21 +56,12 @@ TARGET_USERIMAGES_USE_F2FS := true
 
 # Platform
 TARGET_BOARD_PLATFORM := mt6833
+TARGET_BOARD_PLATFORM_GPU := mali-g57mc3
 
-# A/B - Virtual A/B
+# A/B
 AB_OTA_UPDATER := true
-AB_OTA_PARTITIONS := \
-    boot \
-    product \
-    system \
-    system_ext \
-    vbmeta \
-    vbmeta_system \
-    vendor
-
 TARGET_NO_RECOVERY := true
 BOARD_USES_RECOVERY_AS_BOOT := true
-ENABLE_VIRTUAL_AB := true
 
 # Kernel / mkbootimg args
 # Kernel / DTB
@@ -109,39 +100,44 @@ BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
 BOARD_MKBOOTIMG_ARGS += --dtb_offset $(BOARD_DTB_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 
-# Particiones Dinámicas
+# fstab
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/recovery.fstab
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
+
+# Dynamic / Logical Partitions
 BOARD_MOTOROLA_DYNAMIC_PARTITIONS_PARTITION_LIST := system system_ext vendor product
 BOARD_MOTOROLA_DYNAMIC_PARTITIONS_SIZE := 9122611200
 BOARD_SUPER_PARTITION_SIZE := 9126805504
 BOARD_SUPER_PARTITION_GROUPS := motorola_dynamic_partitions
 
-# Recovery / UI Config
+# Recovery
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_HAS_NO_SELECT_BUTTON := true
+
+# Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 41943040
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/recovery.fstab
 
-# Recovery UI Config & Fixes (Android 12.1 MTK)
-TW_THEME := portrait_hdpi
-TARGET_SCREEN_WIDTH := 720
-TARGET_SCREEN_HEIGHT := 1600
-TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
-TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
-TW_MAX_BRIGHTNESS := 255
-TW_DEFAULT_BRIGHTNESS := 100
+# Partitions (listed in the file) to be wiped under recovery.
+TARGET_RECOVERY_WIPE := $(DEVICE_PATH)/recovery.wipe
 
-# Forzar el uso de la librería extendida y parches de C++
-TARGET_RECOVERY_UI_LIB := librecovery_ui_ext
-TARGET_RECOVERY_DEVICE_MODULES += librecovery_ui_ext
-TW_INPUT_BLACKLIST := "hbtp_vm"
-TW_SUPPORT_INPUT_1_2 := true
+# System as root
+BOARD_ROOT_EXTRA_FOLDERS := metadata first_stage_ramdisk
+BOARD_SUPPRESS_SECURE_ERASE := true
 
-# Recovery UI Config & Fixes (Android 12.1 MTK)
-TARGET_RECOVERY_CPPFLAGS += -DRECOVERY_INPUT_EVENT_RET_TYPE=int
+# Copying vendor and product files to recovery ramdisk
+BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
+TARGET_COPY_OUT_VENDOR := vendor
+BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
+TARGET_COPY_OUT_PRODUCT := product
 
-# Forzar el uso de la librería extendida
-TARGET_RECOVERY_UI_LIB := librecovery_ui_ext
-TARGET_RECOVERY_DEVICE_MODULES += librecovery_ui_ext
+#Android Verified Boot
+BOARD_AVB_ENABLE := true
+BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3
+BOARD_AVB_VBMETA_SYSTEM := system system_ext product
+BOARD_AVB_VBMETA_SYSTEM_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
+BOARD_AVB_VBMETA_SYSTEM_ALGORITHM := SHA256_RSA2048
+BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
+BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX_LOCATION := 2
 
 # Crypto
 BOARD_USES_METADATA_PARTITION := true
@@ -151,24 +147,47 @@ PLATFORM_SECURITY_PATCH := 2025-04-01
 VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 PLATFORM_VERSION := 99.87.36
 
-# Ajuste del nombre del Mantenedor
-TW_DEVICE_VERSION := Alex
 
-# Extras y Compatibilidad Android 12.1
+# Crypto
+BOARD_USES_METADATA_PARTITION := true
+TW_INCLUDE_CRYPTO := true
+TW_INCLUDE_FBE_METADATA_DECRYPT := true
+
+
+# Recovery UI Config & Fixes (Android 12.1 MTK)
+TW_THEME := portrait_hdpi
+TARGET_SCREEN_WIDTH := 720
+TARGET_SCREEN_HEIGHT := 1600
+TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
+TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
+TARGET_USE_CUSTOM_LUN_FILE_PATH := "/config/usb_gadget/g1/functions/mass_storage.usb0/lun.%d/file"
+TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
+TW_MAX_BRIGHTNESS := 255
+TW_DEFAULT_BRIGHTNESS := 40
 TW_USE_TOOLBOX := true
 TW_INCLUDE_NTFS_3G := true
-TW_INCLUDE_RESETPROP := true
-TWRP_INCLUDE_LOGCAT := true
-TARGET_USES_LOGD := true
 TW_USE_NEW_MINADBD := true
-TW_EXCLUDE_APEX := true
-TW_NO_EXFAT_FUSE := true
+TW_EXCLUDE_DEFAULT_USB_INIT := true
 
 # Modulos de Touch
 TW_LOAD_VENDOR_MODULES := "ili9882_mmi.ko sensors_class.ko utags.ko mmi_info.ko"
 
-# Build Broken Rules
+TW_NO_LEGACY_PROPS := true
+TW_NO_BIND_SYSTEM := true
+TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID := true
+TW_IGNORE_MISC_WIPE_DATA := true
+BOARD_USES_MTK_HARDWARE := true
+RECOVERY_SDCARD_ON_DATA := true
+TW_USES_VENDOR_LIBS := true
+PRODUCT_ENFORCE_VINTF_MANIFEST := true
+PRODUCT_FULL_TREBLE := true
+TW_INCLUDE_REPACKTOOLS := true
+TW_INCLUDE_RESETPROP = true
+
+# logd
+TWRP_INCLUDE_LOGCAT := true
+TARGET_USES_LOGD := true
+
+# Build Debug
 BUILD_BROKEN_DUP_RULES := true
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
-BUILD_BROKEN_MISSING_REQUIRED_MODULES := true
-BUILD_BROKEN_VINTF_PRODUCT_COPY_FILES := true
