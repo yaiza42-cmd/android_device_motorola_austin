@@ -162,23 +162,15 @@ TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
 TW_MAX_BRIGHTNESS := 255
 TW_DEFAULT_BRIGHTNESS := 40
 
-# --- SECCIÓN DE AHORRO DE ESPACIO (VERSIÓN ESTABLE Y SEGURA) ---
+# --- SECCIÓN DE AHORRO EXTREMO DE ESPACIO (ORANGEFOX) ---
 RECOVERY_RAMDISK_COMPRESSOR := lzma
 TW_EXCLUDE_I18N := true
-TW_EXTRA_LANGUAGES := false
+TW_EXCLUDE_NTFS_3G := true
 TWRP_INCLUDE_LOGCAT := false
 TW_INCLUDE_REPACKTOOLS := false
-TW_EXCLUDE_APEX := true
-TWRP_INCLUDE_PYTHON := false
-
-# Flags específicos de OrangeFox (Recorte de "grasa")
 FOX_REMOVE_AAPT := 1
 FOX_EMPTY_NOT_USE_BASH := 1
-FOX_EXCLUDE_NANO := 1
-FOX_EXCLUDE_THEME_MANAGER := 1      # <--- Este ahorra unos 3MB él solo
-FOX_EXCLUDE_SETTINGS_MANAGER := 1
-FOX_DELETE_MAGISK_ADDON := 1        # <--- Este ahorra casi 2MB
-# ------------------------------------------------------------------
+# -------------------------------------------------------
 
 TW_USE_TOOLBOX := true
 TW_USE_NEW_MINADBD := true
