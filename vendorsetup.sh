@@ -19,7 +19,7 @@ export TW_DEFAULT_LANGUAGE="es" # Cambiado a español si prefieres
 
     # Variables A/B - ¡ESTO ES CRÍTICO!
     export FOX_AB_DEVICE=1
-    export OF_VIRTUAL_AB_DEVICE=1 # Añade esta línea si el Austin usa Virtual A/B (común en Android 12)
+    export FOX_VIRTUAL_AB_DEVICE=1 # Añade esta línea si el Austin usa Virtual A/B (común en Android 12)
     export OF_NO_TREBLE_COMPATIBILITY_CHECK=1
     export OF_NO_MIUI_PATCH_WARNING=1
     export OF_VANILLA_BUILD=1 # Cambia a 1 para una build limpia sin añadidos de MIUI/ROMs específicas
