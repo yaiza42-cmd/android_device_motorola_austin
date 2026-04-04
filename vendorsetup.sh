@@ -4,7 +4,7 @@ export TW_DEFAULT_LANGUAGE="es" # Cambiado a español si prefieres
 
 	# Reducir tamaño de la imagen (Útil para no exceder el tamaño del boot)
 	export FOX_REMOVE_AAPT=1
-	export FOX_REMOVE_BUSYBOX_BINARY=1
+	export FOX_REMOVE_BUSYBOX_BINARY=0
 
 	# Ajuste de partición Boot para MT6833
 	export FOX_RECOVERY_BOOT_PARTITION="/dev/block/by-name/boot"
@@ -27,15 +27,15 @@ export TW_DEFAULT_LANGUAGE="es" # Cambiado a español si prefieres
 	export OF_QUICK_BACKUP_LIST="/boot;/metadata;"
 
 	# Herramientas y binarios
-	export FOX_USE_BASH_SHELL=1
-	export FOX_ASH_IS_BASH=1
-	export FOX_USE_TAR_BINARY=1
-	export FOX_USE_SED_BINARY=1
-	export FOX_USE_XZ_UTILS=1
+	export FOX_USE_BASH_SHELL=0
+	export FOX_ASH_IS_BASH=0
+	export FOX_USE_TAR_BINARY=0
+	export FOX_USE_SED_BINARY=0
+	export FOX_USE_XZ_UTILS=0
 	export FOX_REPLACE_TOOLBOX_GETPROP=1
-	export FOX_USE_NANO_EDITOR=1
+	export FOX_USE_NANO_EDITOR=0
 	export OF_ENABLE_LPTOOLS=1
-	export FOX_ENABLE_APP_MANAGER=1
+	export FOX_ENABLE_APP_MANAGER=0
 	export FOX_DELETE_AROMAFM=1
 
 	# Magisk y Versión (Ajustado a Yaiza)
