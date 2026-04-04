@@ -183,7 +183,7 @@ TW_EXCLUDE_APEX := true
 
 # Eliminar Magisk y funciones de Root
 OFOX_DISABLE_MAGISK_BUILTIN := 1
-TW_INCLUDE_RESETPROP := false
+TW_INCLUDE_RESETPROP := true
 
 # Activar modo ultra ligero y quitar backups pesados
 FOX_MINIMAL_IMAGE := 1
@@ -226,4 +226,5 @@ TW_LOAD_VENDOR_MODULES := $(shell echo \"$(shell ls $(DEVICE_PATH)/recovery/root
 TW_LOAD_VENDOR_BOOT_MODULES := true
 
 # Compatibilidad UI
+TW_USE_NEW_MINUI := true
 
