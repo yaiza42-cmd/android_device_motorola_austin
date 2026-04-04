@@ -15,7 +15,7 @@ export TW_DEFAULT_LANGUAGE="es" # Cambiado a español si prefieres
 
 	# VBMeta y Keymaster
 	export OF_PATCH_VBMETA_FLAG=0
-	export OF_DEFAULT_KEYMASTER_VERSION=4.1
+	export OF_DEFAULT_KEYMASTER_VERSION=0
 
 	# Variables A/B recomendadas
 	export FOX_AB_DEVICE=1
