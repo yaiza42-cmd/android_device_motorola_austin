@@ -168,8 +168,24 @@ TW_EXCLUDE_I18N := true
 TW_EXCLUDE_NTFS_3G := true
 TWRP_INCLUDE_LOGCAT := false
 TW_INCLUDE_REPACKTOOLS := false
+
+# Eliminar Magisk integrado
+OFOX_DISABLE_MAGISK_BUILTIN := 1
+
+# Activar modo ultra ligero de OrangeFox (elimina temas pesados y fuentes extra)
+FOX_MINIMAL_IMAGE := 1
+
+# Eliminar binarios pesados y no esenciales
 FOX_REMOVE_AAPT := 1
-FOX_EMPTY_NOT_USE_BASH := 1
+FOX_REMOVE_BASH := 1
+FOX_REMOVE_NANO := 1
+FOX_REMOVE_TAR := 1
+FOX_REMOVE_SED := 1
+FOX_EXCLUDE_APEX := 1
+
+# Evitar la instalación de apps adicionales y el gestor de archivos Aroma (muy pesado)
+TW_EXCLUDE_TWRPAPP := true
+FOX_DELETE_AROMA_FM := 1
 # -------------------------------------------------------
 
 TW_USE_TOOLBOX := true
