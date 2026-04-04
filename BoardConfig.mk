@@ -145,8 +145,8 @@ BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX_LOCATION := 2
 
 # Crypto & Security
 BOARD_USES_METADATA_PARTITION := true
-TW_INCLUDE_CRYPTO := true
-TW_INCLUDE_FBE_METADATA_DECRYPT := true
+TW_INCLUDE_CRYPTO := false
+TW_INCLUDE_FBE_METADATA_DECRYPT := false
 PLATFORM_SECURITY_PATCH := 2025-04-01
 VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 PLATFORM_VERSION := 99.87.36
@@ -168,14 +168,17 @@ TW_EXCLUDE_I18N := true
 TW_EXCLUDE_NTFS_3G := true
 TWRP_INCLUDE_LOGCAT := false
 TW_INCLUDE_REPACKTOOLS := false
+TW_EXCLUDE_APEX := true
 
-# Eliminar Magisk integrado
+# Eliminar Magisk y funciones de Root
 OFOX_DISABLE_MAGISK_BUILTIN := 1
+TW_INCLUDE_RESETPROP := false
 
-# Activar modo ultra ligero de OrangeFox (elimina temas pesados y fuentes extra)
+# Activar modo ultra ligero y quitar backups pesados
 FOX_MINIMAL_IMAGE := 1
+FOX_EXCLUDE_ENCRYPTED_BACKUPS := 1
 
-# Eliminar binarios pesados y no esenciales
+# Eliminar binarios pesados (Usar solo Toybox)
 FOX_REMOVE_AAPT := 1
 FOX_REMOVE_BASH := 1
 FOX_REMOVE_NANO := 1
@@ -183,7 +186,7 @@ FOX_REMOVE_TAR := 1
 FOX_REMOVE_SED := 1
 FOX_EXCLUDE_APEX := 1
 
-# Evitar la instalación de apps adicionales y el gestor de archivos Aroma (muy pesado)
+# Apps y complementos
 TW_EXCLUDE_TWRPAPP := true
 FOX_DELETE_AROMA_FM := 1
 # -------------------------------------------------------
