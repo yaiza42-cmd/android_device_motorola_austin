@@ -216,7 +216,6 @@ RECOVERY_SDCARD_ON_DATA := true
 TW_USES_VENDOR_LIBS := true
 PRODUCT_ENFORCE_VINTF_MANIFEST := true
 PRODUCT_FULL_TREBLE := true
-TW_INCLUDE_RESETPROP := false
 
 # Build Debug
 BUILD_BROKEN_DUP_RULES := true
@@ -227,4 +226,4 @@ TW_LOAD_VENDOR_MODULES := $(shell echo \"$(shell ls $(DEVICE_PATH)/recovery/root
 TW_LOAD_VENDOR_BOOT_MODULES := true
 
 # Compatibilidad UI
-TW_USE_NEW_MINUI := false
+
