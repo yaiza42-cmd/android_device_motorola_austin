@@ -14,14 +14,15 @@ export TW_DEFAULT_LANGUAGE="es" # Cambiado a español si prefieres
 	export OF_USE_GREEN_LED=0
 
 	# VBMeta y Keymaster
-	export OF_PATCH_VBMETA_FLAG=0
-	export OF_DEFAULT_KEYMASTER_VERSION=0
+	export OF_PATCH_VBMETA_FLAG=1
+	export OF_DEFAULT_KEYMASTER_VERSION=4.1
 
-	# Variables A/B recomendadas
-	export FOX_AB_DEVICE=1
-	export OF_NO_TREBLE_COMPATIBILITY_CHECK=1
-	export OF_NO_MIUI_PATCH_WARNING=1
-	export OF_VANILLA_BUILD=0
+    # Variables A/B - ¡ESTO ES CRÍTICO!
+    export FOX_AB_DEVICE=1
+    export OF_VIRTUAL_AB_DEVICE=1 # Añade esta línea si el Austin usa Virtual A/B (común en Android 12)
+    export OF_NO_TREBLE_COMPATIBILITY_CHECK=1
+    export OF_NO_MIUI_PATCH_WARNING=1
+    export OF_VANILLA_BUILD=1 # Cambia a 1 para una build limpia sin añadidos de MIUI/ROMs específicas
 
 	# Lista de copia de seguridad rápida
 	export OF_QUICK_BACKUP_LIST="/boot;/metadata;"
@@ -44,7 +45,7 @@ export TW_DEFAULT_LANGUAGE="es" # Cambiado a español si prefieres
 	
 	# Configuración de Pantalla para Austin (720x1600)
 	export OF_SCREEN_H=1600
-	export OF_STATUS_H=90
+	export OF_STATUS_H=100
 	export OF_STATUS_INDENT_LEFT=48
 	export OF_STATUS_INDENT_RIGHT=48
 	export OF_CLOCK_POS=1
