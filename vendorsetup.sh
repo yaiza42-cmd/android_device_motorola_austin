@@ -29,7 +29,7 @@ export TW_DEFAULT_LANGUAGE="es" # Cambiado a español si prefieres
 
 	# Herramientas y binarios
 	export FOX_USE_BASH_SHELL=0
-	export FOX_ASH_IS_BASH=0
+	export FOX_ASH_IS_BASH=1 # Cambia a 1 para que use ASH como reemplazo ligero
 	export FOX_USE_TAR_BINARY=0
 	export FOX_USE_SED_BINARY=0
 	export FOX_USE_XZ_UTILS=0
@@ -38,6 +38,8 @@ export TW_DEFAULT_LANGUAGE="es" # Cambiado a español si prefieres
 	export OF_ENABLE_LPTOOLS=1
 	export FOX_ENABLE_APP_MANAGER=0
 	export FOX_DELETE_AROMAFM=1
+	# Magisk (Para evitar errores de espacio en el ramdisk)
+    export OF_DISABLE_MAGISK_EXTRACT=1 # Añade esto para que no intente descomprimir Magisk en el arranque
 
 	# Magisk y Versión (Ajustado a Yaiza)
 	export FOX_MAINTAINER_PATCH_VERSION="1"
