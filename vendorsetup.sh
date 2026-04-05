@@ -18,7 +18,6 @@ export TW_DEFAULT_LANGUAGE="es" # Cambiado a español si prefieres
 
     # Variables A/B - ¡ESTO ES CRÍTICO!
     export FOX_AB_DEVICE=1
-    export FOX_VIRTUAL_AB_DEVICE=1 # Añade esta línea si el Austin usa Virtual A/B (común en Android 12)
     export OF_NO_TREBLE_COMPATIBILITY_CHECK=1
     export OF_NO_MIUI_PATCH_WARNING=1
     export FOX_VANILLA_BUILD=1 # Cambia a 1 para una build limpia sin añadidos de MIUI/ROMs específicas
@@ -27,8 +26,8 @@ export TW_DEFAULT_LANGUAGE="es" # Cambiado a español si prefieres
 	export OF_QUICK_BACKUP_LIST="/boot;/metadata;"
 
 	# Herramientas y binarios
-	export FOX_USE_BASH_SHELL=0
-	export FOX_ASH_IS_BASH=1 # Cambia a 1 para que use ASH como reemplazo ligero
+	export FOX_USE_BASH_SHELL=1
+    export FOX_ASH_IS_BASH=0
 	export FOX_USE_TAR_BINARY=0
 	export FOX_USE_SED_BINARY=0
 	export FOX_USE_XZ_UTILS=0
