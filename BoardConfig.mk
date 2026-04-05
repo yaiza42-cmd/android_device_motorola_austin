@@ -157,27 +157,36 @@ PLATFORM_SECURITY_PATCH := 2025-04
 VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 PLATFORM_VERSION := 12.0.0
 
-# --- Gráficos (Ajuste 736px para Moto Austin) ---
+# --- Gráficos (Base Kyoto/Austin) ---
 TARGET_SCREEN_WIDTH := 736
 TARGET_SCREEN_HEIGHT := 1600
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBA_8888"
 RECOVERY_GRAPHICS_FORCE_USE_LINUX_FB := true
 TW_USE_NEW_MINUI := true
+TW_NO_SCREEN_BLANK := true
 
-# --- Solución Linker (android_memset16) ---
-# Intentamos incluir libcutils sin forzar flags globales que rompen el build
+# --- Estabilidad de Binario (64-bit) ---
+TARGET_USES_64_BIT_BINDER := true
+BOARD_HAS_NO_SELECTIVE_METADATA := true
+
+# --- Solución Linker y Módulos ---
 TARGET_RECOVERY_DEVICE_MODULES += libcutils
-TW_EXCLUDE_LPDUMP := true
+BUILD_BROKEN_MISSING_REQUIRED_MODULES := true
+TW_INCLUDE_LIBRESETPROP := true
+TW_INCLUDE_REPACKTOOLS := true
+
+# --- Brillo (Confirmado por ADB) ---
+TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
+TW_MAX_BRIGHTNESS := 255
+TW_DEFAULT_BRIGHTNESS := 150
+
+# --- Identificación ---
+TW_DEVICE_VERSION := OrangeFox_Austin_V1
 
 # --- Compatibilidad Android 12.1 ---
 BUILD_BROKEN_MISSING_REQUIRED_MODULES := true
 TW_INCLUDE_LIBRESETPROP := true
 TW_INCLUDE_REPACKTOOLS := true
-
-# --- Brillo ---
-TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel0-backlight/brightness"
-TW_MAX_BRIGHTNESS := 255
-TW_DEFAULT_BRIGHTNESS := 150
 
 # Eliminar el logo de Motorola al entrar
 TW_SCREEN_BLANK_ON_BOOT := true
