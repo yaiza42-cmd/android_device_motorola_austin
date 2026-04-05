@@ -157,27 +157,24 @@ PLATFORM_SECURITY_PATCH := 2025-04
 VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 PLATFORM_VERSION := 12.0.0
 
-# --- Configuración de Pantalla y Gráficos (Ajuste 736px) ---
+# --- Gráficos (Ajuste 736px para Moto Austin) ---
 TARGET_SCREEN_WIDTH := 736
 TARGET_SCREEN_HEIGHT := 1600
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBA_8888"
 RECOVERY_GRAPHICS_FORCE_USE_LINUX_FB := true
 TW_USE_NEW_MINUI := true
 
-# --- Solución al error de Linker (android_memset16) ---
-# Esto obliga a incluir las funciones de memoria que le faltan a tu base
+# --- Solución Linker (android_memset16) ---
+# Intentamos incluir libcutils sin forzar flags globales que rompen el build
 TARGET_RECOVERY_DEVICE_MODULES += libcutils
-TARGET_RECOVERY_STUBS := true
-TARGET_GLOBAL_CFLAGS += -Dstronger_memset
-TARGET_GLOBAL_CPPFLAGS += -Dstronger_memset
+TW_EXCLUDE_LPDUMP := true
 
-# --- Compatibilidad con Android 12.1 / 13 (Motorola Austin) ---
+# --- Compatibilidad Android 12.1 ---
 BUILD_BROKEN_MISSING_REQUIRED_MODULES := true
 TW_INCLUDE_LIBRESETPROP := true
 TW_INCLUDE_REPACKTOOLS := true
 
-# --- Brillo y Retroiluminación ---
-# Intentamos la ruta estándar de Moto para que no inicie a oscuras
+# --- Brillo ---
 TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel0-backlight/brightness"
 TW_MAX_BRIGHTNESS := 255
 TW_DEFAULT_BRIGHTNESS := 150
