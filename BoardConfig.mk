@@ -182,7 +182,7 @@ TW_EXCLUDE_APEX := true
 
 # Eliminar Magisk y funciones de Root
 OFOX_DISABLE_MAGISK_BUILTIN := 1
-TW_INCLUDE_RESETPROP := true
+TW_INCLUDE_RESETPROP := false
 
 # Activar modo ultra ligero y quitar backups pesados
 FOX_MINIMAL_IMAGE := 1
