@@ -183,13 +183,14 @@ TW_DEFAULT_BRIGHTNESS := 150
 # --- Identificación ---
 TW_DEVICE_VERSION := OrangeFox_Austin_V1
 
+# Eliminar el logo de Motorola al entrar
+TW_SCREEN_BLANK_ON_BOOT := true
+
 # --- Compatibilidad Android 12.1 ---
 BUILD_BROKEN_MISSING_REQUIRED_MODULES := true
 TW_INCLUDE_LIBRESETPROP := true
 TW_INCLUDE_REPACKTOOLS := true
 
-# Eliminar el logo de Motorola al entrar
-TW_SCREEN_BLANK_ON_BOOT := true
 
 # --- SECCIÓN DE AHORRO EXTREMO DE ESPACIO (ORANGEFOX) ---
 RECOVERY_RAMDISK_COMPRESSOR := gzip
