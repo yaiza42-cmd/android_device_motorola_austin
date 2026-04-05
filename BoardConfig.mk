@@ -162,15 +162,23 @@ TW_THEME := portrait_hdpi
 TARGET_SCREEN_WIDTH := 720
 TARGET_SCREEN_HEIGHT := 1600
 
-# FIX: Forzamos motor nuevo y formato BGRA para evitar el logo congelado
+# --- Forzar Framebuffer Clásico ---
+RECOVERY_GRAPHICS_FORCE_USE_LINUX_FB := true
 TW_USE_NEW_MINUI := true
-TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
 
+# Casi todos los Dimensity con fb0 usan RGBX o RGBA
+TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
+
+# Si la pantalla sigue negra, prueba después con "BGRA_8888"
+# pero "RGBX_8888" es el estándar de MediaTek.
+
+# Forzar el encendido de la retroiluminación
 TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
-TARGET_USE_CUSTOM_LUN_FILE_PATH := "/config/usb_gadget/g1/functions/mass_storage.usb0/lun.%d/file"
-TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
 TW_MAX_BRIGHTNESS := 255
-TW_DEFAULT_BRIGHTNESS := 40
+TW_DEFAULT_BRIGHTNESS := 150
+
+# Eliminar el logo de Motorola al entrar
+TW_SCREEN_BLANK_ON_BOOT := true
 
 # --- SECCIÓN DE AHORRO EXTREMO DE ESPACIO (ORANGEFOX) ---
 RECOVERY_RAMDISK_COMPRESSOR := gzip
