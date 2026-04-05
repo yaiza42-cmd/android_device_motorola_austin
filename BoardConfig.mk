@@ -163,13 +163,15 @@ TARGET_SCREEN_HEIGHT := 1600
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBA_8888"
 RECOVERY_GRAPHICS_FORCE_USE_LINUX_FB := true
 TW_USE_NEW_MINUI := true
-TW_NO_SCREEN_BLANK := true
+
+# Eliminar el logo de Motorola al entrar (Pantalla negra intencional de 1 segundo)
+TW_SCREEN_BLANK_ON_BOOT := true
 
 # --- Estabilidad de Binario (64-bit) ---
 TARGET_USES_64_BIT_BINDER := true
 BOARD_HAS_NO_SELECTIVE_METADATA := true
 
-# --- Solución Linker y Módulos ---
+# --- Solución Linker, Módulos y Android 12.1 ---
 TARGET_RECOVERY_DEVICE_MODULES += libcutils
 BUILD_BROKEN_MISSING_REQUIRED_MODULES := true
 TW_INCLUDE_LIBRESETPROP := true
@@ -182,9 +184,6 @@ TW_DEFAULT_BRIGHTNESS := 150
 
 # --- Identificación ---
 TW_DEVICE_VERSION := OrangeFox_Austin_V1
-
-# Eliminar el logo de Motorola al entrar
-TW_SCREEN_BLANK_ON_BOOT := true
 
 # --- Compatibilidad Android 12.1 ---
 BUILD_BROKEN_MISSING_REQUIRED_MODULES := true
