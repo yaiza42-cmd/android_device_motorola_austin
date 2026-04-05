@@ -176,7 +176,7 @@ TW_DEFAULT_BRIGHTNESS := 40
 RECOVERY_RAMDISK_COMPRESSOR := gzip
 TW_EXCLUDE_I18N := true
 TW_EXCLUDE_NTFS_3G := true
-TWRP_INCLUDE_LOGCAT := false
+TWRP_INCLUDE_LOGCAT := true
 TW_INCLUDE_REPACKTOOLS := false
 TW_EXCLUDE_APEX := true
 
@@ -190,10 +190,10 @@ FOX_EXCLUDE_ENCRYPTED_BACKUPS := 1
 
 # Eliminar binarios pesados (Usar solo Toybox)
 FOX_REMOVE_AAPT := 1
-FOX_REMOVE_BASH := 1
+FOX_REMOVE_BASH := 0
 FOX_REMOVE_NANO := 1
-FOX_REMOVE_TAR := 1
-FOX_REMOVE_SED := 1
+FOX_REMOVE_TAR := 0
+FOX_REMOVE_SED := 0
 FOX_EXCLUDE_APEX := 1
 
 # Apps y complementos
@@ -224,6 +224,7 @@ BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 TW_LOAD_VENDOR_MODULES := $(shell echo \"$(shell ls $(DEVICE_PATH)/recovery/root/vendor/lib/modules/)\")
 TW_LOAD_VENDOR_BOOT_MODULES := true
 
-# Compatibilidad UI
+# Compatibilidad UI (Solo una vez)
 TW_USE_NEW_MINUI := true
+
 
