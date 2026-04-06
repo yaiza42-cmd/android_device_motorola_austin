@@ -41,7 +41,7 @@ export TW_DEFAULT_LANGUAGE="es" # Cambiado a español si prefieres
 
 	# Magisk y Versión (Ajustado a Yaiza)
 	export FOX_MAINTAINER_PATCH_VERSION="1"
-	export OF_MAINTAINER=Alex
+	export OF_MAINTAINER=Y2
 	
 	# Configuración de Pantalla para Austin (720x1600)
 	export OF_SCREEN_H=1600
