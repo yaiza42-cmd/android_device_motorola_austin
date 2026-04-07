@@ -8,6 +8,7 @@ export TW_DEFAULT_LANGUAGE="es" # Cambiado a español si prefieres
 
 	# Ajuste de partición Boot para MT6833
 	export FOX_RECOVERY_BOOT_PARTITION="/dev/block/by-name/boot"
+	export OF_DYNAMIC_FULL_SIZE= 9126805504
 
 	# Linterna (Si en Kyota no funcionaba, es probable que en Austin necesite otra ruta)
 	export OF_FLASHLIGHT_ENABLE=0
