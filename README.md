@@ -1,46 +1,53 @@
-TWRP (ESTABLE) & OrangeFox en fase prueba (alfa) para Motorola Moto G 5G 2022 austin 
--------------------------------------------------
--------------------------------------------------
-DESPUES DE NUMEROSAS PRUEBAS Y CORRECCIONES AQUI ESTA EN LA PRIMERA VERSION ESTABLE DE TWRP_AUSTIN.IMG
-Motorola moto g 5G (2022) 
+# 📱 Recovery Tree for Motorola Moto G 5G (2022) - "austin"
 
-El SMARTAPHONE debió recibir la última actualización de soporte oficial de Motorola el software T1SAS33.73-40-0-12-20
+Estado actual de los proyectos:
+* **TWRP:** Estable (Primera versión lanzada tras extensas pruebas y correcciones).
+* **OrangeFox:** Fase de pruebas (Alpha).
 
-ACLARAMOS QUE (boot y vendor) TIENEN QUE ESTAR EN LA ULTIMA VERSION QUE MOTOROLA LE DIÓ SOPORTE A ESTE DISPOSITIVO
-T1SAS33.73-40-0-12-20   
+---
 
+## ⚠️ Requisitos Previos y Firmware Base
+
+Para garantizar el correcto funcionamiento del recovery, el smartphone debe tener instalada la última actualización de soporte oficial de Motorola.
+
+**Nota técnica importante:** En su última actualización, Motorola dejó las particiones `boot` y `vendor` en **Android 12**, mientras que actualizó `system`, `system_ext` y `product` a **Android 13**. Si acabas de desbloquear el bootloader y estás en la última stock ROM, este es el entorno compatible.
+
+### Propiedades Esperadas (Stock ROM)
+Asegúrate de que tu sistema coincida con estas huellas (fingerprints) base antes de flashear:
+
+# Huella General del Sistema
+    os_version -> '13'
+    security_patch -> '2025-04-01'
+    fingerprint -> 'motorola/austin_g/austin:13/T1SAS33M.73-40-0-12-20'
+
+# Huellas de Boot y Vendor (Mantenidas en Android 12)
     Prop: HAB_META -> 'austin_50'
     Prop: com.android.build.boot.fingerprint -> 'motorola/austin_g/austin:12/T1SAS33.73-40-0-12-20'
-    Prop: com.android.build.boot.os_version -> '12'
-    Prop: com.android.build.boot.security_patch -> '2025-04-01'
     Prop: com.android.build.vendor.fingerprint -> 'motorola/austin_g/austin:12/T1SAS33.73-40-0-12-20'
-    Prop: com.android.build.vendor.os_version -> '12'
-    Prop: com.android.build.vendor.security_patch -> '2025-04-01'
 
-COMO REFERENCIA SI ACABAMOS DE DESBLOQUEAR EL BOOTLOADER NUESTRO SISTEMA ORIGINAL DEBERIA SER ESTE
+----------------------------------------------------
+🛠️ Instrucciones de Instalación
+Desbloquear el Bootloader (sigue las instrucciones oficiales de Motorola).
 
-    os_version -> '13'
-    fingerprint -> 'motorola/austin_g/austin:13/T1SAS33M.73-40-0-12-20'
-    security_patch -> '2025-04-01'
+Reiniciar el dispositivo en modo Fastboot / Bootloader.
 
-SI LO TIENES ASI ENTONCES TODO LO DEMAS ESTARA BIEN PORQUE MOTOROLA A ESTE DISPOSITIVO DEJO EL BOOT Y VENDOR EN ANDROID 12 Y SYSTEM, SYSTEM_EXT Y PRODUCT EN ANDROID 13
-LO IMPOETANTE AQUI ESTE QUE TU MOTOROLA HAYA RECIBIDO LA ULTIMA UPDATE DEL SOPORTE QUE FUE ESTA (T1SAS33M.73-40-0-12-20) 
+Abrir una terminal en tu PC y ejecutar los siguientes comandos para flashear la imagen en el slot A:
 
 
-Instrucciones
+    fastboot flash boot_a twrp_austin.img
+    fastboot reboot recovery
 
-1- desbloquear el bootloader
 
-2- entrar en modo bootloader
+📝 Notas de Rendimiento y Bugs Conocidos
+1. Comportamiento del Panel Táctil (chipone_tddi)
 
-     fastboot flash boot_a twrp_austin.img
-     
-     fastboot reboot recovery
-  
-Notas 
+       Primer arranque: Al iniciar en modo recovery, el driver táctil tarda un momento en inicializarse. Espera de 8 a 10 segundos antes de intentar tocar la pantalla.
 
-1- cuando entres a modo recovery en twrp espera de 8 a 10 segundos a que se active el driver tactil chipone_tddi en tú twrp
+       Suspensión de pantalla: Si la pantalla de TWRP se apaga por inactividad, al volver a encenderla el driver táctil demorará entre 2 y 3 segundos en volver a responder.
 
-2- aclaración cuando se apaga la pantalla en modo twrp y la vuelves a encender el driver táctil demora unos 2 o 3 segundos en activarse
+2. Cifrado de Datos (FBE)
+Estado actual: El descifrado nativo de la partición /data NO funciona por el momento.
 
-QUE NO FUNCIONA EL DESCENCRIPTADO DE DATA Y BACKUP DE DATA, TIENES FLASHEAR UN MODULO DE DESCENCRIPTADO 
+       Consecuencia: No es posible leer los archivos internos ni realizar un backup de la partición Data directamente.
+
+       Workaround (Solución temporal): Es necesario flashear un módulo/zip para desactivar el cifrado forzado (Disable Force Encryption) o formatear Data si necesitas realizar modificaciones internas.
