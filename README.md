@@ -9,6 +9,7 @@ El SMARTAPHONE debió recibir la última actualización de soporte oficial de Mo
 ACLARAMOS QUE boot y vendor TIENEn QUE ESTAR EN LA ULTIMA VERSION QUE MOTOROLA LE DIÓ SOPORTE A ESTE DISPOSITIVO
 T1SAS33.73-40-0-12-20
 
+    Prop: HAB_META -> 'austin_50'
     Prop: com.android.build.boot.fingerprint -> 'motorola/austin_g/austin:12/T1SAS33.73-40-0-12-20/4dabf:user/release-keys'
     Prop: com.android.build.boot.os_version -> '12'
     Prop: com.android.build.boot.security_patch -> '2025-04-01'
