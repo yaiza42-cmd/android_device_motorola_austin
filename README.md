@@ -1,4 +1,4 @@
-TWRP (ESTABLE) & OrangeFox en fase prueba (alfa) para Motorola Moto G 5G 2022 austin en fase de prueba
+TWRP (ESTABLE) & OrangeFox en fase prueba (alfa) para Motorola Moto G 5G 2022 austin 
 -------------------------------------------------
 -------------------------------------------------
 DESPUES DE NUMEROSAS PRUEBAS Y CORRECCIONES AQUI ESTA EN LA PRIMERA VERSION ESTABLE DE TWRP_AUSTIN.IMG
