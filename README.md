@@ -29,6 +29,6 @@ Instrucciones
   
 Notas 
 
-1- cuando entres a modo recovery en twrp espera de 8 a 10 segundos a que se actibe el driver tactil chiponne_tddi en twrp
+1- cuando entres a modo recovery en twrp espera de 8 a 10 segundos a que se active el driver tactil chiponne_tddi en tú twrp
 
 2- aclaración cuando se apaga la pantalla en modo twrp y la vuelves a encender el driver táctil demora unos 2 o 3 segundos en activarse
