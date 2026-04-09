@@ -17,11 +17,11 @@ T1SAS33.73-40-0-12-20
     Prop: com.android.build.vendor.os_version -> '12'
     Prop: com.android.build.vendor.security_patch -> '2025-04-01'
 
-EL SISTEMA AUNQUE ESTE NO ES IMPORTANTE ES UTIL COMO REFERENCIA SI ACABAMOS DE DESBLOQUEAR EL BOOTLOADER NUESTRO SISTEMA ORIGINAL ES ESTE 
+COMO REFERENCIA SI ACABAMOS DE DESBLOQUEAR EL BOOTLOADER NUESTRO SISTEMA ORIGINAL DEBERIA SER ESTE
 
-    Prop: com.android.build.system.os_version -> '13'
-    Prop: com.android.build.system.fingerprint -> 'motorola/austin_g/austin:13/T1SAS33M.73-40-0-12-20/97c85c:user/release-keys'
-    Prop: com.android.build.system.security_patch -> '2025-04-01'
+    os_version -> '13'
+    fingerprint -> 'motorola/austin_g/austin:13/T1SAS33M.73-40-0-12-20/97c85c:user/release-keys'
+    security_patch -> '2025-04-01'
 
 SI LO TIENES ASI ENTONCES TODO LO DEMAS TARA BIEN PORQUE MOTOROLA A ESTE DISPOSITIVO DEJO EL BOOT Y VENDOR EN ANDROID 12 Y SYSTEM, SYSTEM_EXT Y PRODUCT EN ANDROID 13   
 
