@@ -16,15 +16,17 @@ T1SAS33.73-40-0-12-20
     Prop: com.android.build.vendor.os_version -> '12'
     Prop: com.android.build.vendor.security_patch -> '2025-04-01'
 
-....................................................................................
+
 Instrucciones
 
 1- desbloquear el bootloader
 
 2- entrar en modo bootloader
+
      fastboot flash boot_a twrp_austin.img
+     
      fastboot reboot recovery
-.....................................................................................     
+  
 Notas 
 
 1- cuando entres a modo recovery en twrp espera de 8 a 10 segundos a que se actibe el driver tactil chiponne_tddi en twrp
