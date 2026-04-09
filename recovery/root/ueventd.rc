@@ -67,6 +67,13 @@ subsystem dma_heap
 /dev/usb_accessory        0660   root       usb
 /dev/tun                  0660   system     vpn
 
+# Block devices (MicroSD)
+/dev/block/mmcblk1*       0660   root       system
+/dev/block/vold/*         0660   root       system
+
+# MediaTek misc
+/dev/block/by-name/sdcard 0660  root       system
+
 # CDMA radio interface MUX
 /dev/ppp                  0660   radio      vpn
 
