@@ -1,4 +1,4 @@
-TWRP ESTABLE & OrangeFox para Motorola Moto G 5G 2022 austin en fase de prueba
+TWRP (ESTABLE) & OrangeFox en fase prueba (alfa) para Motorola Moto G 5G 2022 austin en fase de prueba
 -------------------------------------------------
 -------------------------------------------------
 DESPUES DE NUMEROSAS PRUEBAS Y CORRECCIONES AQUI ESTA EN LA PRIMERA VERSION ESTABLE DE TWRP_AUSTIN.IMG
@@ -32,3 +32,5 @@ Notas
 1- cuando entres a modo recovery en twrp espera de 8 a 10 segundos a que se active el driver tactil chiponne_tddi en tú twrp
 
 2- aclaración cuando se apaga la pantalla en modo twrp y la vuelves a encender el driver táctil demora unos 2 o 3 segundos en activarse
+
+QUE NO FUNCIONA EL DESCENCRIPTADO DE DATA Y BACKUP DE DATA, TIENES FLASHEAR UN MODULO DE DESCENCRIPTADO 
