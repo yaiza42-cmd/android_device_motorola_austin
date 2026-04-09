@@ -6,8 +6,8 @@ Motorola moto g 5G (2022)
 
 El SMARTAPHONE debió recibir la última actualización de soporte oficial de Motorola el software T1SAS33.73-40-0-12-20
 
-ACLARAMOS QUE boot y vendor TIENEn QUE ESTAR EN LA ULTIMA VERSION QUE MOTOROLA LE DIÓ SOPORTE A ESTE DISPOSITIVO
-T1SAS33.73-40-0-12-20
+ACLARAMOS QUE (boot y vendor) TIENEN QUE ESTAR EN LA ULTIMA VERSION QUE MOTOROLA LE DIÓ SOPORTE A ESTE DISPOSITIVO
+T1SAS33.73-40-0-12-20   
 
     Prop: HAB_META -> 'austin_50'
     Prop: com.android.build.boot.fingerprint -> 'motorola/austin_g/austin:12/T1SAS33.73-40-0-12-20/4dabf:user/release-keys'
@@ -16,6 +16,14 @@ T1SAS33.73-40-0-12-20
     Prop: com.android.build.vendor.fingerprint -> 'motorola/austin_g/austin:12/T1SAS33.73-40-0-12-20/4dabf:user/release-keys'
     Prop: com.android.build.vendor.os_version -> '12'
     Prop: com.android.build.vendor.security_patch -> '2025-04-01'
+
+EL SISTEMA AUNQUE ESTE NO ES IMPORTANTE ES UTIL COMO REFERENCIA SI ACABAMOS DE DESBLOQUEAR EL BOOTLOADER NUESTRO SISTEMA ORIGINAL ES ESTE 
+
+    Prop: com.android.build.system.os_version -> '13'
+    Prop: com.android.build.system.fingerprint -> 'motorola/austin_g/austin:13/T1SAS33M.73-40-0-12-20/97c85c:user/release-keys'
+    Prop: com.android.build.system.security_patch -> '2025-04-01'
+
+SI LO TIENES ASI ENTONCES TODO LO DEMAS TARA BIEN PORQUE MOTOROLA A ESTE DISPOSITIVO DEJO EL BOOT Y VENDOR EN ANDROID 12 Y SYSTEM, SYSTEM_EXT Y PRODUCT EN ANDROID 13   
 
 
 Instrucciones
