@@ -4,9 +4,9 @@ TWRP (ESTABLE) & OrangeFox en fase prueba (alfa) para Motorola Moto G 5G 2022 au
 DESPUES DE NUMEROSAS PRUEBAS Y CORRECCIONES AQUI ESTA EN LA PRIMERA VERSION ESTABLE DE TWRP_AUSTIN.IMG
 Motorola moto g 5G (2022) 
 
-El sistema debió recibir la ultama actualización de soporte de motorola T1SAS33.73-40-0-12-20
+El SMARTAPHONE debió recibir la última actualización de soporte oficial de Motorola el software T1SAS33.73-40-0-12-20
 
-ACLARAMOS boot y vendor TIENE QUE ESTAR EN LA ULTIMA VERSION QUE MOTOROLA LE DIó SOPORTE A ESTE DISPOSITIVO
+ACLARAMOS QUE boot y vendor TIENEn QUE ESTAR EN LA ULTIMA VERSION QUE MOTOROLA LE DIÓ SOPORTE A ESTE DISPOSITIVO
 T1SAS33.73-40-0-12-20
 
     Prop: com.android.build.boot.fingerprint -> 'motorola/austin_g/austin:12/T1SAS33.73-40-0-12-20/4dabf:user/release-keys'
