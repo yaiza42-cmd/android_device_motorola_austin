@@ -16,6 +16,17 @@ on post-fs
     symlink /dev/block/sdb /dev/block/mmcblk0boot1
     symlink /dev/block/mmcblk0boot0 /dev/block/by-name/preloader_a
     symlink /dev/block/mmcblk0boot1 /dev/block/by-name/preloader_b
+	
+    # 1. Asegurar que el firmware esté en el lugar correcto
+    mkdir /vendor/firmware 0755 root root
+    copy /system/etc/chipone_firmware_tianma.bin /vendor/firmware/chipone_firmware_tianma.bin
+    chmod 0644 /vendor/firmware/chipone_firmware_tianma.bin
+    
+    # Forzar carga del firmware Chipone cuando el sistema esté listo
+on property:ro.boot.bootreason=*
+    exec -- /system/bin/sh -c "sleep 8 && chmod 666 /sys/devices/platform/11018000.spi4/spi_master/spi4/spi4.2/cts_firmware/update_from_file"
+    exec -- /system/bin/sh -c "sleep 1 && echo /system/etc/chipone_firmware_tianma.bin > /sys/devices/platform/11018000.spi4/spi_master/spi4/spi4.2/cts_firmware/update_from_file"
+
 
     # Support A/B feature for combo emmc and ufs OTA update
     symlink /dev/block/by-name/preloader_a /dev/block/by-name/preloader_emmc_a
@@ -27,3 +38,26 @@ on post-fs
 
     symlink /dev/block/mapper/pl_a /dev/block/by-name/preloader_raw_a
     symlink /dev/block/mapper/pl_b /dev/block/by-name/preloader_raw_b
+	
+on boot
+    # Cargar la infraestructura de MediaTek en orden
+    insmod /vendor/lib/modules/1.1/sensors_class.ko
+    insmod /vendor/lib/modules/1.1/wmt_drv.ko
+	insmod /vendor/lib/modules/1.1/fpsgo.ko
+    insmod /vendor/lib/modules/1.1/exfat.ko
+    
+    # Forzar al kernel a buscar la tarjeta en el bus MMC 1 (MicroSD)
+    exec u:r:recovery:s0 root root -- /system/bin/sh -c "echo 1 > /sys/bus/mmc/devices/mmc1\:0001/rescan"
+    # Si la ruta de arriba falla, prueba con esta más genérica:
+    exec u:r:recovery:s0 root root -- /system/bin/sh -c "for i in /sys/bus/mmc/devices/mmc*; do echo 1 > $i/rescan; done"
+    exec u:r:recovery:s0 root root -- /system/bin/sh -c "sleep 10 && echo /system/etc/chipone_firmware_tianma.bin > /sys/devices/platform/11018000.spi4/spi_master/spi4/spi4.2/cts_firmware/update_from_file"	
+	
+service touch_repair /system/bin/sh /system/bin/touch_fix.sh
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
+on property:sys.usb.config=adb
+    chmod 777 /system/bin/touch_fix.sh
+    start touch_repair
