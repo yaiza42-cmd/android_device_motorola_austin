@@ -38,7 +38,7 @@ Reiniciar el dispositivo en modo Fastboot / Bootloader.
 Abrir una terminal en tu PC y ejecutar los siguientes comandos para flashear la imagen en el slot A:
 
 
-    fastboot flash boot_a twrp_austin.img
+    fastboot flash boot_a twrp_austin_optimizado2.0.img
     fastboot reboot recovery
 
 
