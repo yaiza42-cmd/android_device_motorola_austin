@@ -4,6 +4,10 @@ Estado actual de los proyectos:
 * **TWRP:** Estable (Primera versión lanzada tras extensas pruebas y correcciones).
 * **OrangeFox:** Fase de pruebas (Alpha).
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/79b58a3b-8abe-4bfc-8db7-bbecc804d306" width="30%" />
+  <img src="[URL_DE_TU_FOTO_2](https://github.com/user-attachments/assets/38672e5f-548a-473b-8b99-e77d4b529e4f)" width="30%" />
+</p>
 ---
 
 ## ⚠️ Requisitos Previos y Firmware Base
