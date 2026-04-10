@@ -1,7 +1,7 @@
 # 📱 Recovery Tree for Motorola Moto G 5G (2022) - "austin"
 
 Estado actual de los proyectos:
-* **TWRP:** Estable (Primera versión lanzada tras extensas pruebas y correcciones).
+* **TWRP:** Estable (Segunda versión estable lanzada tras extensas pruebas y correcciones).
 * **OrangeFox:** Fase de pruebas (Alpha).
 
 <p align="center">
